@@ -121,8 +121,9 @@
 	padding-left: 8px;
 }
 
-.tweeted-by{
+.col.tweeted-by{
 	margin:0px;
+	padding: 0px;
 }
 .tweeted-by *{
 	display: inline-block;
@@ -133,16 +134,18 @@
 	margin:0px;
 }
 
-.tweet-msg{
+.col.tweet-msg{
 	font-weight: 400;
 	margin: 0px;
+	padding: 0px;
 }
 .tweet-msg p{
 	margin:0px;
 }
 
-.tweet-controls{
+.col.tweet-controls{
 	margin: 0px;
+	padding: 0px;
 }
 
 .tweet-controls .col.s2{

@@ -15,7 +15,7 @@
 			})
 			.when('/home', {
 				'controller' : 'TwitterCtrl',
-				//'templateUrl': 'view/home.view.html'
+				'templateUrl': 'view/home.view.html'
 			})
 			.otherwise({'redirectTo': 'sign_in'});
 	}
