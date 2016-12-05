@@ -1,0 +1,155 @@
+#profile-card{
+	border-radius: 5px;
+	border: 1px solid #e1e8ed;
+}
+
+#profile-card img{
+	border-radius: 5px 5px 0px 0px;
+
+}
+
+#profile-card-info{
+	padding-top: 10px;
+	line-height: 15px;
+}
+
+#profile-card-info h6{
+	margin: 0px;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+#profile-card-info span{
+	font-size: 14px;
+	color: #66757f;
+}
+
+#profile-card-stats{
+	margin-top: 10px;
+	margin-bottom: 0px;
+}
+
+#profile-card-stats span{
+	margin: 0px;
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: 0.2px;
+}
+
+#profile-card-stats h5{
+	margin: 0px;
+	font-weight: 400;
+	font-size: 20px;
+}
+
+#tweetbox-timeline-container{
+	height: 58px;
+	background-color: #EBEBEB;
+	border-radius: 5px 5px 0px 0px;
+	border: 1px solid #e1e8ed;
+	border-bottom: 0px;
+	margin-bottom: 0px;
+	padding: 10px;
+}
+
+
+#tweetbox-timeline-container * {
+	display: inline-block;
+}
+
+#tweetbox-timeline-container > .user-twitcon{
+	margin-left: 10px;
+}
+
+
+.user-twitcon img{
+	border-radius: 5px;
+	border: 1px solid #e1e8ed;
+	height: 38px;
+	background-color: black;
+	vertical-align: middle;
+}
+
+/*.user-twitcon{
+	height: 35px;
+}*/
+
+#tweetbox input{
+	background-color: white;
+	height: 38px;
+	width: 480px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    border: 1px solid #e1e8ed;
+    margin: 0px;
+	vertical-align: middle;
+}
+
+
+
+
+#twitter-timeline-container{
+	margin-top: 0px;
+	height: 500px;
+	border-radius: 0px 0px 5px 5px;
+	border: 1px solid #e1e8ed;
+	border-top: 0px;
+}
+
+#who-to-follow{
+	height: 500px;
+	border-radius: 5px;
+	border: 1px solid #e1e8ed;
+}
+
+#twitter-timeline-container .tweet{
+	height: auto;
+	border-bottom: 1px solid #e1e8ed;
+	padding: 10px;
+}
+
+.s1.tweeted-by-twitcon{
+	padding: 0px;
+}
+
+.s1.tweeted-by-twitcon img{
+	height: 45px;
+	margin-top: 4px;
+}
+
+.col.tweet-content{
+	padding-left: 8px;
+}
+
+.tweeted-by{
+	margin:0px;
+}
+.tweeted-by *{
+	display: inline-block;
+}
+
+.tweeted-by h6{
+	font-weight: bold;
+	margin:0px;
+}
+
+.tweet-msg{
+	font-weight: 400;
+	margin: 0px;
+}
+.tweet-msg p{
+	margin:0px;
+}
+
+.tweet-controls{
+	margin: 0px;
+}
+
+.tweet-controls .col.s2{
+	display: inline-block;
+	padding: 0px;
+}
+
+.tweet-controls .col.s2 *{
+	vertical-align: middle;
+}

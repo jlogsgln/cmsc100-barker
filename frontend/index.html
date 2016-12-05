@@ -1,46 +1,124 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
-	<link rel="stylesheet" type="text/css" href="assets/css/global-styles.css">
-</head>
-<body>
-	<nav class="white darken-1 z-depth-1">
-		<div class="nav-wrapper" >
-			
-			<ul class="tabs left hide-on-med-and-down "">
-				<li class="tab col s3 "><a class="active" href="#test1">Home</a></li>
-				<li class="tab col s3"><a href="#test2">Notifications</a></li>
-				<li class="tab col s3"><a href="#test3">Message</a></li>
-			</ul>	
-			<a href="#" class="brand-logo center"><i class="material-icons">polymer</i></a>
-			<ul class="right hide-on-med-and-down "  id="right-nav">
-				<li class="col s5" id="search-nav-container">
-					<input placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required>
-				</li>
-				<li class="col s1" id="icon-nav">
-					<img src="assets/images/user.jpg" alt="">
-				</li>
-				<li class="col s3">
-					<button class="btn waves-effect waves-teal" id="compose-nav">Tweet</button>
-				</li>
-			</ul>	
+	<head>
+		<title></title>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
+		<link rel="stylesheet" type="text/css" href="assets/css/global-styles.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/timeline-styles.css">
+
+	</head>
+	<body>
+		<nav class="white darken-1">
+			<div class="nav-wrapper" >
+				
+				<ul class="tabs left hide-on-med-and-down "">
+					<li class="tab col s3 "><a class="active" href="#test1">Home</a></li>
+					<li class="tab col s3"><a href="#test2">Notifications</a></li>
+					<li class="tab col s3"><a href="#test3">Message</a></li>
+				</ul>
+				<a href="#" class="brand-logo center"><i class="material-icons">polymer</i></a>
+				<ul class="right hide-on-med-and-down "  id="right-nav">
+					<li class="col s5" id="search-nav-container">
+						<input placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required>
+					</li>
+					<li class="col s1" id="icon-nav">
+						<img src="assets/images/user.jpg" alt="">
+					</li>
+					<li class="col s3">
+						<button class="btn waves-effect waves-teal" id="compose-nav">Tweet</button>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<main>
+		<div class="container">
+			<div class="row">
+				<div class="col l3">
+					<div class="card z-depth-0" id="profile-card">
+						<div class="card-image" >
+							<img src="assets/images/header.jpg">
+							<span class="card-title">Card Title</span>
+						</div>
+						<div class="card-content" id="profile-card-info">
+							<h6>Rain Tomista</h6>
+							<span>@raintomista</span>
+
+							<div class="row" id="profile-card-stats">
+								<div class="col s4">
+									<span>Tweets</span>
+									<h5>10.1K</h5>
+								</div>
+								<div class="col s4">
+									<span>Following</span>
+									<h5>240</h5>
+								</div>
+								<div class="col s4">
+									<span>Followers</span>
+									<h5>594</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col l6">
+					<div class="card z-depth-0" id="tweetbox-timeline-container">
+						<div class="user-twitcon">
+							<img src="assets/images/user.jpg" alt="">
+						</div>
+						<div id="tweetbox"><input placeholder="What's happening?" type="text" class="active validate"  required></div>
+					</div>
+					<div class="card z-depth-0" id="twitter-timeline-container">
+						<div class="col s12 tweet">
+							<div class="col s1 tweeted-by-twitcon">
+								<div class="user-twitcon">
+									<img src="assets/images/user.jpg" alt="">
+								</div>
+							</div>
+							<div class="col s10 tweet-content">
+								<div class="row tweeted-by">
+									<div class="col s12">
+										<h6>Rain Tomista</h6>
+										<span>@raintomista</span>
+									</div>
+								</div>
+								<div class="row tweet-msg">
+									<div class="col s12">
+										<p>I <3 U CLAUDS</p>
+									</div>
+								</div>
+								<div class="row tweet-controls">
+									<div class="col s12">
+										<div class="col s2">
+											<i class="material-icons">call_missed</i>
+											<span>2</span>
+										</div>
+										<div class="col s2">
+											<i class="material-icons">repeat</i>
+											<span>10</span>
+										</div>
+										<div class="col s2">
+											<i class="material-icons">favorite</i>
+											<span>10</span>
+										</div>
+										<div class="col s2">
+											<i class="material-icons">more_horiz</i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 l3">
+					<div class="card z-depth-0" id="who-to-follow">
+						
+					</div>
+				</div>
+			</div>
 		</div>
-	</nav>
-	<main>
-	
-	</main>
-
-	<script type="text/javascript" src="assets/js/jquery-3.1.0.min.js"></script>
-    <script type="text/javascript" src="assets/js/materialize.min.js"></script>
-</body>
+		</main>
+		<script type="text/javascript" src="assets/js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="assets/js/materialize.min.js"></script>
+	</body>
 </html>
-
-
-
-
-
-
-
