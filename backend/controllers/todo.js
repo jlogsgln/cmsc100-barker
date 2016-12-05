@@ -33,7 +33,7 @@ exports.create_account = function(req, res, next){
 
 	console.log(req.query);
 	var query_string = 'INSERT INTO User(user_full_name, user_handle, password, email, followers) VALUES(?,?,?,?,?)';
-	var request_data = [req.query.fullname, req.query.email, req.query.handle, req.query.password];
+	var request_data = [req.query.fullname, req.query.handle, req.query.password, req.query.email, req.query.followers];
 
 	db.query(query_string, request_data, function(err, result){
 		if(err){

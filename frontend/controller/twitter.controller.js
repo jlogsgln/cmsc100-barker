@@ -33,15 +33,15 @@
 						if (res.value != 0){
 							console.log(res);
 							$scope.user = res;
-							console.log(user);
-							$window.location.href = '#/home';
+							console.log($scope.user);
+							$window.location.href = '/#/home';
 						}
 						else{
 							alert(res.message);
-							$window.location.href = '#/sign_in';
+							$window.location.href = '/#/sign_in';
 						}
 					}, function(err){
-						$window.location.href = '#/sign_in';
+						$window.location.href = '/#/sign_in';
 
 					})
 			}
@@ -62,15 +62,15 @@
 					.createAccount(data)
 					.then(function(res) {
 						if(res.status != 500){
-		            		console.log(res);
-		            		$window.location.href = '#/sign_in';
+		            		alert(res.message);
+		            		$window.location.href = '/#/sign_in';
 		            	}else{
 		            		alert(res.statusText);
-		            		$window.location.href = '#/sign_in';
+		            		$window.location.href = '/#/sign_in';
 		            	}
 	                }, function(err) {
 	                    console.log(err);
-	                    alert(err);
+	                    alert(err.statusText);
 	                })
 			}
 		}
@@ -80,7 +80,7 @@
 				TwitterService
 					.signOut()
 					.then(function(res){
-						$window.location.href = '#/sign_in';
+						$window.location.href = '/#/sign_in';
 					}, function(err){
 						alert(err);
 					})
