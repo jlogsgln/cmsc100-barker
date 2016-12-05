@@ -82,10 +82,22 @@
 					.then(function(res){
 						$window.location.href = '/#/sign_in';
 					}, function(err){
-						alert(err);
+						alert(err.statusText);
 					})
 			}
 		}
+
+		$scope.get_tweets = function(){
+			TwitterService
+				.getTweets()
+				.then(function(res){
+					console.log(res);
+					$scope.tweets = res;
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
 
 
 	}

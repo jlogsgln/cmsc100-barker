@@ -52,8 +52,18 @@ exports.sign_out = function(req, res, next){
 	  if(err) {
 	    console.log(err);
 	  } else {
-	    return res.send({message: 'Account looged out successfully!'});
+	    return res.send({message: 'Account logged out successfully!'});
 	  }
 	});
 	
+};
+
+exports.get_tweets = function(req, res, next){
+
+	console.log(req.query);
+	var query_string = 'SELECT * FROM Tweets';
+	
+	db.query(query_string, [], function(err, result){
+		res.send(result);
+	});
 };

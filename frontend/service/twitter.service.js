@@ -69,6 +69,23 @@
 			return deferred.promise;
 		}
 
+		const getTweets = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'GET',
+				url: '/todo/get_tweets',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
 
 		let service = {};
         service.createAccount = createAccount;
