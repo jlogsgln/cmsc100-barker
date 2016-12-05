@@ -43,7 +43,7 @@
 }
 
 #tweetbox-timeline-container{
-	height: 58px;
+	height: 140px;
 	background-color: #EBEBEB;
 	border-radius: 5px 5px 0px 0px;
 	border: 1px solid #e1e8ed;
@@ -74,15 +74,17 @@
 	height: 35px;
 }*/
 
-#tweetbox input{
+#tweetbox textarea{
 	background-color: white;
-	height: 38px;
-	width: 480px;
-    padding: 0px 10px;
+	height: 45px;
+	width: 95%;
+	padding: 10px 10px;
+
     border-radius: 5px;
     border: 1px solid #e1e8ed;
     margin: 0px;
 	vertical-align: middle;
+	margin-bottom: 10px;
 }
 
 
@@ -155,4 +157,11 @@
 
 .tweet-controls .col.s2 *{
 	vertical-align: middle;
+}
+
+
+#nav-dropdown{
+	margin-top: 50px;
+	border: 1px solid #e1e8ed;
+	border-radius: 	5px;
 }
