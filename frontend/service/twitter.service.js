@@ -52,6 +52,23 @@
 			return deferred.promise;
 		}
 
+		const signOut = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'POST',
+				url: '/todo/sign_out',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
 
 		let service = {};
         service.createAccount = createAccount;

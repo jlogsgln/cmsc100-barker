@@ -7,12 +7,6 @@ var redisStore = require('connect-redis')(session);
 var client 		= redis.createClient();
 
 
-app.use('/', express.static(__dirname + '/frontend'));
-app.use(require('method-override')());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(require(__dirname + '/backend/config/router')(express.Router()));
-
 app.use(session({
     secret: 'Twitter',
     resave: false,
@@ -23,15 +17,20 @@ app.use(session({
         client: client
     }),
     cookie: {
-    	
+        
         httpOnly: false,
         secure: false, // set "true" if https
         maxAge: 3600000 * 5 //5 hours?
     }
 }))
 
+app.use('/', express.static(__dirname + '/frontend'));
+app.use(require('method-override')());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(require(__dirname + '/backend/config/router')(express.Router()));
 
-var server = app.listen(7000, function() {
+var server = app.listen(9000, function() {
 	var host = server.address().address;
 	var port = server.address().port;
 
