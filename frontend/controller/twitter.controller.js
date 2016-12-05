@@ -31,11 +31,14 @@
 					.signIn(data)
 					.then(function(res){
 						if (res.value != 0){
-							console.log(res.value);
+							console.log(res);
+							$scope.user = res;
+							console.log(user);
 							$window.location.href = '#/home';
 						}
 						else{
 							alert(res.message);
+							$window.location.href = '#/sign_in';
 						}
 					}, function(err){
 						$window.location.href = '#/sign_in';
@@ -48,8 +51,8 @@
 			$scope.clicked = function(){	
 				const data = {
 					fullname: $scope.fullname,
-					email: $scope.email,
 					handle: $scope.username,
+					email: $scope.email,
 					password: $scope.password,
 					followers: 0
 				}
@@ -58,9 +61,13 @@
 				TwitterService
 					.createAccount(data)
 					.then(function(res) {
-	            		console.log(res);
-	            		alert(res.message);
-	            		$window.location.href = '#/sign_in';        
+						if(res.status != 500){
+		            		console.log(res);
+		            		$window.location.href = '#/sign_in';
+		            	}else{
+		            		alert(res.statusText);
+		            		$window.location.href = '#/sign_in';
+		            	}
 	                }, function(err) {
 	                    console.log(err);
 	                    alert(err);
@@ -75,8 +82,7 @@
 					.then(function(res){
 						$window.location.href = '#/sign_in';
 					}, function(err){
-						console.log(err);
-						$window.location.href = '#/sign_in';
+						alert(err);
 					})
 			}
 		}
