@@ -111,11 +111,23 @@
 				})
 		}
 
-		$scope.get_logged_info = function(){
+
+		$scope.get_tweetcount = function(){
 			TwitterService
-				.getLoggedInfo()
+				.getTweetCount()
 				.then(function(res){
-					$scope.user_info = res[0];
+					$scope.tweetcount = res[0];
+					console.log(res);
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
+		$scope.get_followerscount = function(){
+			TwitterService
+				.getFollowersCount()
+				.then(function(res){
+					$scope.followerscount = res[0];
 					console.log(res);
 				}, function(err){
 					alert(err.statusText);
@@ -138,6 +150,16 @@
 					}, function(err){
 						alert(err.statusText);
 					})
+				
+				TwitterService
+					.getTweetCount()
+					.then(function(res){
+						$scope.tweetcount = res[0];
+						console.log(res);
+					}, function(err){
+						alert(err.statusText);
+					})
+
 				TwitterService
 					.getTweets()
 					.then(function(res){
@@ -146,8 +168,46 @@
 					}, function(err){
 						alert(err.statusText);
 					})
+
 			}
 		}
+
+		$scope.delete_tweet = function(tweet) { 
+			var index = $scope.tweets.indexOf(tweet)
+			var tweet = $scope.tweets[index];
+
+			console.log(tweet);
+			// const data = {
+			// 	tweet_id: tweet.tweetid;				
+			// }
+
+			TwitterService
+				.deleteTweet(tweet)
+				.then(function(res){
+					console.log(res);
+				}, function(err){
+					console.log(err);
+				})  
+
+			TwitterService
+				.getTweetCount()
+				.then(function(res){
+					$scope.tweetcount = res[0];
+					console.log(res);
+				}, function(err){
+					alert(err.statusText);
+				})
+
+			TwitterService
+				.getTweets()
+				.then(function(res){
+					console.log(res);
+					$scope.tweets = res;
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
 
 
 
