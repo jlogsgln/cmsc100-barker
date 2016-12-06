@@ -114,8 +114,8 @@
 									</a>
 								</div>
 								<div class="col s2 tweet-ctrl-more" ng-click="">
-									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Edit Tweet">
-										<i class="material-icons">edit</i>
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Edit Tweet" onclick="javascript:eraseText(); Materialize.toast('Tweet edited!', 4000);">
+										<i class="material-icons" data-target="modal1">edit</i>
 									</a>
 								</div>
 								<div class="col s2 tweet-ctrl-more" ng-click="delete_tweet(tweet)">
@@ -139,6 +139,24 @@
 			</div>
 		</div>
 	</div>
+	<div id="modal1" class="modal" >
+    <div class="modal-content">
+       <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea " id="textarea1" class="materialize-textarea" ng-model="edit_modal" ng-init="edit_tweet()"></textarea>
+          <label for="textarea1">Edit here</label>
+        </div>
+      </div>
+    </form>
+  </div>
+        
+    </div>
+    <div class="modal-footer">
+      <a href="" onclick="javascript:eraseText(); Materialize.toast('Tweet edited!', 4000);" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="edit_clicked()">POST</a>
+    </div>
+  </div>
 </div>
 </main>
 </main>
@@ -154,9 +172,6 @@
 	        var left = limit - $(this).val().length;
 	        $counter.toggleClass("overlimit", left < 0).text(left);
 	    });
-
-
-
 
 		$('#tweetbox-textarea').keyup(function() {
 		    var thetext = $(this).val();
@@ -186,4 +201,13 @@
 	        $counter.text(limit).removeClass('overlimit');
 	    })
 	});
+
+	$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+    	function eraseText() {
+	    document.getElementById("textarea1").value = "";
+	}
+      
 </script>
