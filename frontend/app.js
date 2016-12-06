@@ -17,6 +17,10 @@
 				'controller' : 'TwitterCtrl',
 				'templateUrl': 'view/home.view.html'
 			})
+			.when('/profile', {
+				'controller' : 'TwitterCtrl',
+				'templateUrl': 'view/profile.view.html'
+			})
 			.otherwise({'redirectTo': 'sign_in'});
 	}
 })();

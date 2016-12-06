@@ -16,7 +16,6 @@
 			handle: "",
 			password: "",
 			email: "",
-			followers: 0,
 			tweet: "",
 			tweet_likes: 0,
 			tweet_retweets: 0
@@ -54,8 +53,7 @@
 					fullname: $scope.fullname,
 					handle: $scope.username,
 					email: $scope.email,
-					password: $scope.password,
-					followers: 0
+					password: $scope.password
 				}
 
 				console.log(data);
@@ -81,7 +79,7 @@
 				TwitterService
 					.signOut()
 					.then(function(res){
-						 console.log(res);
+						console.log(res);
 						$window.location.href = '/#/sign_in';
 					}, function(err){
 						alert(err.statusText);
@@ -104,7 +102,7 @@
 			TwitterService
 				.getLogged()
 				.then(function(res){
-					$scope.user_logged = res;
+					$scope.logged_account = res;
 					console.log(res);
 				}, function(err){
 					alert(err.statusText);
@@ -144,12 +142,23 @@
 				})
 		}
 
+		$scope.get_followingcount = function(){
+			TwitterService
+				.getFollowingCount()
+				.then(function(res){
+					$scope.followingcount = res[0];
+					console.log(res);
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
 		$scope.post_tweet = function(){
 			$scope.post_tweet_clicked = function(){
 				const data = {
 					tweet: $scope.tweet,
-					likes: $scope.tweet_likes,
-					retweets: $scope.tweet_retweets
+					likes: 0,
+					retweets: 0
 				}
 
 				console.log(data);
@@ -217,8 +226,31 @@
 				})
 		}
 
+		$scope.like_tweet = function(tweet) { 
+			var index = $scope.tweets.indexOf(tweet)
+			var tweet = $scope.tweets[index];
+			const data = {
+				tweet_id: tweet.tweetid,
+				userid: $scope.logged_account.user_id
+			}
 
+			TwitterService
+				.likeTweet(data)
+				.then(function(res){
+					console.log(res);
+				}, function(err){
+					console.log(err);
+				})
 
+			TwitterService
+				.getTweets()
+				.then(function(res){
+					console.log(res);
+					$scope.tweets = res;
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
 
 	}
 })();

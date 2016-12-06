@@ -1,6 +1,6 @@
 -- CREATE USER 'project'@'localhost' IDENTIFIED BY 'tiger';
-CREATE DATABASE barker;
 -- GRANT ALL ON project.* TO 'project'@'localhost';
+CREATE DATABASE barker;
 
 USE barker;
 
@@ -16,7 +16,7 @@ create table if not exists User(
 
 create table if not exists Tweets(
 	tweetid int auto_increment,
-	tweet varchar(200) not null,
+	tweet varchar(140) not null,
 	tweet_time dateTime not null,
 	tweet_likes int,
 	tweet_retweets int,
@@ -27,25 +27,35 @@ create table if not exists Tweets(
 
 create table if not exists Replies(
 	replyid int auto_increment,
-	reply varchar(200) not null,
+	reply varchar(140) not null,
 	reply_time dateTime not null,
 	reply_likes int,
 	reply_retweets int,
 	tweetid int not null,
 	userid int not null,
 	constraint Replies_replyid_pk primary key(replyid),
-	constraint Tweets_tweetid_fk foreign key(tweetid) references Tweets(tweetid)
+	constraint Tweets_tweetid_fk foreign key(tweetid) references Tweets(tweetid) on delete cascade on update cascade
 );
 
-create table if not exists Followers(
-	followerid int,
-	follower_full_name varchar(30) not null,
-	user_handle varchar(30) not null,
-	userid int not null,
-	constraint Followers_followerid_pk primary key(followerid)
+create table if not exists Follows(
+	followid int auto_increment,
+	userid_follows int not null,
+	userid_followed int not null,
+	constraint Follows_followid_pk primary key(followid),
+	constraint User_userid_follows_fk foreign key(userid_follows) references User(userid),
+	constraint User_userid_followed_fk foreign key(userid_followed) references User(userid)
 );
 
+create table if not exists Likes(
+	likeid int auto_increment,
+	like_userid int not null,
+	liked_tweetid int not null,
+	constraint Likes_likeid_pk primary key(likeid),
+	constraint User_like_userid_fk foreign key(like_userid) references User(userid),
+	constraint Tweets_liked_tweetid_fk foreign key(liked_tweetid) references Tweets(tweetid) on delete cascade on update cascade
+);
 insert into User (userid, user_full_name, user_handle, password, email, followers) values (0, 'Rain Tomista', '@admin', 'admin', 'admin@up.edu.ph', 4);
+
 insert into User (userid, user_full_name, user_handle, password, email, followers) values (1, 'Julia Fields', '@jfields0', 'yQ0QADp', 'jfields0@goo.gl', 4);
 insert into User (userid, user_full_name, user_handle, password, email, followers) values (2, 'Martha Burke', '@mburke1', 'CLORV15d8g', 'mburke1@ucoz.ru', 8);
 insert into User (userid, user_full_name, user_handle, password, email, followers) values (3, 'Jesse Mills', '@jmills2', 'YTZxaYs', 'jmills2@walmart.com', 7);
@@ -75,10 +85,10 @@ insert into User (userid, user_full_name, user_handle, password, email, follower
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (1, 'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '2030-08-06', 191, 104, 7);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (2, 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', '2030-04-05', 485, 83, 24);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (3, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '2015-12-09', 1, 38, 6);
-insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (4, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2015-12-08', 308, 114, 27);
+insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (4, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2015-12-08', 308, 114, 17);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (5, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '2030-11-25', 304, 235, 17);
-insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (6, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2030-08-04', 131, 41, 29);
-insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (7, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', '2030-10-23', 490, 128, 47);
+insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (6, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2030-08-04', 131, 41, 19);
+insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (7, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', '2030-10-23', 490, 128, 17);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (8, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '2030-10-24', 60, 443, 25);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (9, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', '2030-10-17', 39, 80, 2);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (10, 'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', '2030-03-11', 469, 5, 5);
@@ -94,28 +104,21 @@ insert into Replies (replyid, reply, reply_time, reply_likes, reply_retweets, tw
 insert into Replies (replyid, reply, reply_time, reply_likes, reply_retweets, tweetid, userid) values (9, 'Fusce consequat. Nulla nisl. Nunc nisl.', '2030-04-24', 3, 265, 4, 49);
 insert into Replies (replyid, reply, reply_time, reply_likes, reply_retweets, tweetid, userid) values (10, 'Fusce consequat. Nulla nisl. Nunc nisl.', '2030-09-12', 224, 422, 1, 3);
 
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (31, 'Adam Hicks', '@ahicks0', 6);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (32, 'Susan Stephens', '@sstephens1', 2);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (33, 'Judy Taylor', '@jtaylor2', 21);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (34, 'Shirley Reynolds', '@sreynolds3', 21);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (35, 'Donald Moreno', '@dmoreno4', 20);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (36, 'Sarah Rodriguez', '@srodriguez5', 21);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (37, 'Lillian Miller', '@lmiller6', 15);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (38, 'Shawn Hughes', '@shughes7', 12);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (39, 'Randy Grant', '@rgrant8', 23);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (30, 'Diana Anderson', '@danderson9', 15);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (41, 'Diana Stevens', '@dstevensa', 8);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (42, 'Anna Garrett', '@agarrettb', 5);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (43, 'Steven Gomez', '@sgomezc', 6);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (44, 'Ruby Lynch', '@rlynchd', 11);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (45, 'Sean Burns', '@sburnse', 13);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (46, 'Scott Black', '@sblackf', 8);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (47, 'Joseph Rose', '@jroseg', 24);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (48, 'Theresa Berry', '@tberryh', 18);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (49, 'Carol Adams', '@cadamsi', 11);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (50, 'John Jackson', '@jjacksonj', 3);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (51, 'Adam Knight', '@aknightk', 2);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (52, 'Sharon Perry', '@sperryl', 30);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (53, 'Victor Shaw', '@vshawm', 2);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (54, 'Craig Bailey', '@cbaileyn', 10);
-insert into Followers (followerid, follower_full_name, user_handle, userid) values (55, 'Bobby Ryan', '@bryano', 21);
+insert into Follows (followid, userid_follows, userid_followed) values (1, 2, 3);
+insert into Follows (followid, userid_follows, userid_followed) values (2, 12, 13);
+insert into Follows (followid, userid_follows, userid_followed) values (3, 22, 23);
+insert into Follows (followid, userid_follows, userid_followed) values (4, 4, 7);
+insert into Follows (followid, userid_follows, userid_followed) values (5, 8, 3);
+insert into Follows (followid, userid_follows, userid_followed) values (6, 10, 3);
+insert into Follows (followid, userid_follows, userid_followed) values (7, 4, 2);
+insert into Follows (followid, userid_follows, userid_followed) values (8, 2, 6);
+insert into Follows (followid, userid_follows, userid_followed) values (9, 1, 4);
+insert into Follows (followid, userid_follows, userid_followed) values (10, 2, 1);
+insert into Follows (followid, userid_follows, userid_followed) values (11, 3, 3);
+insert into Follows (followid, userid_follows, userid_followed) values (12, 7, 20);
+insert into Follows (followid, userid_follows, userid_followed) values (13, 15, 12);
+insert into Follows (followid, userid_follows, userid_followed) values (14, 17, 17);
+insert into Follows (followid, userid_follows, userid_followed) values (15, 23, 4);
+insert into Follows (followid, userid_follows, userid_followed) values (30, 4, 3);
+insert into Follows (followid, userid_follows, userid_followed) values (17, 2, 8);
+insert into Follows (followid, userid_follows, userid_followed) values (18, 4, 19);
