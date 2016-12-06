@@ -120,6 +120,40 @@
 			return deferred.promise;
 		}
 
+		const getTweetCount = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'GET',
+				url: '/todo/get_tweetcount',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
+		const getFollowersCount = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'GET',
+				url: '/todo/get_followerscount',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
 		const postTweet = function(data){
 			let deferred = $q.defer();
 
@@ -138,14 +172,35 @@
 			return deferred.promise;
 		}
 
+		const deleteTweet = function(tweet){
+			let deferred = $q.defer();
+
+			console.log(tweet);
+			$http({
+				method: 'DELETE',
+				params: tweet,
+				url: '/todo/delete_tweet',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
 		let service = {};
         service.createAccount = createAccount;
         service.signIn = signIn;
         service.signOut = signOut;
         service.getTweets = getTweets;
         service.getLogged = getLogged;
-        service.getLoggedInfo = getLoggedInfo;
+        service.getTweetCount = getTweetCount;
+        service.getFollowersCount = getFollowersCount;
         service.postTweet = postTweet;
+        service.deleteTweet = deleteTweet;
         return service;
 	}
 })();

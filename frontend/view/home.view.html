@@ -17,11 +17,11 @@
 				<ul id='nav-dropdown' class='dropdown-content z-depth-0' >
 					<li><a href="#!">View Profile</a></li>
 					<li class="divider"></li>
-					<li><a href="#!">Logout</a></li>
+					<li><a ng-click="sign_out_clicked()">Logout</a></li>
 				</ul>
 			</li>
 			<li class="col s3" ng-init="sign_out()">
-				<button class="btn waves-effect waves-teal" id="compose-nav"  ng-click="sign_out_clicked()">Tweet</button>
+				<button class="btn waves-effect waves-teal" id="compose-nav">Tweet</button>
 			</li>
 		</ul>
 	</div>
@@ -39,18 +39,18 @@
 					<h6>{{user_logged.fullname}}</h6>
 					<span>{{user_logged.username}}</span>
 
-					<div class="row" id="profile-card-stats" ng-init="get_logged_info()">
-						<div class="col s4">
+					<div class="row" id="profile-card-stats">
+						<div class="col s4" ng-init="get_tweetcount()">
 							<span>Tweets</span>
-							<h5>{{user_info.tweetcount}}</h5>
+							<h5>{{tweetcount.tweetcount}}</h5>
 						</div>
 						<div class="col s4">
 							<span>Following</span>
 							<h5>240</h5>
 						</div>
-						<div class="col s4">
+						<div class="col s4" ng-init="get_followerscount()">
 							<span>Followers</span>
-							<h5>{{user_info.followers}}</h5>
+							<h5>{{followerscount.followerscount}}</h5>
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,7 @@
 				<div class="col s11" id="tweetbox">
 					<textarea placeholder="What's happening?" type="text" class="right active validate materialize-textarea" required ng-model="tweet" ng-init="post_tweet()" id='output'></textarea>
 					<div id="tweetbox-ctrls" class="right">
-						<span id="char-count">140</span>
+						<span id="char-count" ng-init="char=140">{{char - char_input}}</span>
 						<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
 						<button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="javascript:eraseText(); Materialize.toast('Tweet sent!', 4000);">Tweet</button>
 					</div>
@@ -98,7 +98,7 @@
 								<div class="col s2 tweet-ctrl-reply">
 									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Reply">
 										<i class="material-icons">reply</i>
-										<span>2</span>
+										<span></span>
 									</a>
 								</div>
 								<div class="col s2 tweet-ctrl-retweet">
@@ -107,20 +107,20 @@
 										<span>{{tweet.tweet_retweets}}</span>
 									</a>
 								</div>
-								<div class="col s2 tweet-ctrl-fave ctrl-active">
+								<div class="col s2 tweet-ctrl-fave">
 									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Like">
 										<i class="material-icons">favorite</i>
 										<span>{{tweet.tweet_likes}}</span>
 									</a>
 								</div>
-								<div class="col s2 tweet-ctrl-more"" >
-									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="More" data-activates='more-dropdown'>
-										<i class="material-icons">more_horiz</i>
+								<div class="col s2 tweet-ctrl-more" ng-click="delete_tweet(tweet)">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Delete Tweet">
+										<i class="material-icons">delete</i>
 									</a>
 									<ul id='more-dropdown' class='dropdown-content z-depth-0' >
 										<li><a href="#!">Edit Tweet</a></li>
 										<li class="divider"></li>
-										<li><a href="#!">Delete Tweet</a></li>
+										<li><a href="#!" onclick="Materialize.toast('Tweet deleted!', 4000)">Delete Tweet</a></li>
 									</ul>
 								</div>
 							</div>
