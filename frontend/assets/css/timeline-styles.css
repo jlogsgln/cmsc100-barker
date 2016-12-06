@@ -171,6 +171,7 @@
 	font-weight: 400;
 	margin: 0px;
 	padding: 0px;
+	word-wrap: break-word;
 }
 .tweet-msg p{
 	margin:0px;
