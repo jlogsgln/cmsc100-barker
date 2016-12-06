@@ -64,9 +64,9 @@
 					</div>	
 				</div>
 				<div class="col s11" id="tweetbox">
-					<textarea placeholder="What's happening?" type="text" class="right active validate materialize-textarea" required ng-model="tweet" ng-init="post_tweet()" id='output'></textarea>
+					<textarea placeholder="What's happening?" type="text" class="right active validate materialize-textarea" required ng-model="tweet" ng-init="post_tweet()" id='output' onkeyup="countChar(this)"></textarea>
 					<div id="tweetbox-ctrls" class="right">
-						<span id="char-count" ng-init="char=140">{{char - char_input}}</span>
+						<span id="char-count">140</span>
 						<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
 						<button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="javascript:eraseText(); Materialize.toast('Tweet sent!', 4000);">Tweet</button>
 					</div>
@@ -143,4 +143,13 @@
 	function eraseText() {
 	    document.getElementById("output").value = "";
 	}
+
+	function countChar(val) {
+        var len = val.value.length;
+        if (len >= 500) {
+          val.value = val.value.substring(0, 140);
+        } else {
+          $('#char-count').text(140 - len);
+        }
+      };
 </script>
