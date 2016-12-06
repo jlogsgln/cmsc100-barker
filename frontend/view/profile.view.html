@@ -3,9 +3,9 @@
 	<div class="nav-wrapper" >
 		
 		<ul class="tabs left hide-on-med-and-down "">
-			<li class="tab col s3 "><a href="#test1">Home</a></li>
+			<li class="tab col s3 "><a href="profile">Home</a></li>
 			<li class="tab col s3"><a href="#test2">Notifications</a></li>
-			<li class="tab col s3"><a href="#test3" class="">Message</a></li>
+			<li class="tab col s3"><a href="#test3" class="active">Message</a></li>
 		</ul>
 		<a href="#" class="brand-logo center"><i class="material-icons">polymer</i></a>
 		<ul class="right hide-on-med-and-down "  id="right-nav">
@@ -83,8 +83,8 @@
 				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
 			</div>
 			<div id="user-bio" ng-model="logged_account">
-				<h5>{{logged_account.fullname}}</h5>
-				<span>{{logged_account.username}}</span>
+				<a href="#/profile"><h5>{{logged_account.fullname}}</h5></a>
+				<a href="#/profile"><span>{{logged_account.username}}</span></a>
 			</div>
 		</div>
 		<div class="col s6">
@@ -97,8 +97,8 @@
 					</div>
 					<div class="col s11 tweet-content">
 							<div class="col s8 tweeted-by">
-								<h6>{{tweet.user_full_name}}</h6>
-								<span>{{tweet.user_handle}}</span>
+								<a href="#/profile"><h6>{{tweet.user_full_name}}</h6></a>
+								<a href="#/profile"><span>{{tweet.user_handle}}</span></a>
 							</div>
 							<div class="col s4 tweet-timestamp">
 								<span class="right">{{tweet.tweet_time | date:'medium'}} </span>

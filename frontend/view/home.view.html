@@ -15,7 +15,7 @@
 			<li class="col s1" id="icon-nav">
 				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
 				<ul id='nav-dropdown' class='dropdown-content z-depth-0' >
-					<li><a href="#!">View Profile</a></li>
+					<li><a href="#/profile">View Profile</a></li>
 					<li class="divider"></li>
 					<li><a ng-click="sign_out_clicked()">Logout</a></li>
 				</ul>
@@ -36,8 +36,8 @@
 					<span class="card-title">Card Title</span>
 				</div>
 				<div class="card-content" id="profile-card-info" ng-model="logged_account">
-					<h6>{{logged_account.fullname}}</h6>
-					<span>{{logged_account.username}}</span>
+					<a href="#/profile"><h6>{{logged_account.fullname}}</h6></a>
+					<a href="#/profile"><span>{{logged_account.username}}</span></a>
 
 					<div class="row" id="profile-card-stats">
 						<div class="col s4" ng-init="get_tweetcount()">
@@ -77,7 +77,7 @@
 				<div class="card z-depth-0 col s12 tweet" ng-repeat="tweet in tweets">
 					<div class="col s1 tweeted-by-twitcon">
 						<div class="user-twitcon">
-							<img src="assets/images/user.jpg" alt="">
+							<a href="#/profile"><img src="assets/images/user.jpg" alt=""></a>
 						</div>
 					</div>
 
@@ -85,8 +85,8 @@
 
 					<div class="col s11 tweet-content">
 							<div class="col s8 tweeted-by">
-								<h6>{{tweet.user_full_name}}</h6>
-								<span>{{tweet.user_handle}}</span>
+								<a href="#/profile"><h6>{{tweet.user_full_name}}</h6></a>
+								<a href="#/profile"><span>{{tweet.user_handle}}</span></a>
 							</div>
 							<div class="col s4 tweet-timestamp">
 								<span class="right">{{tweet.tweet_time | date:'medium'}} </span>

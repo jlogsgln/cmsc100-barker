@@ -112,16 +112,20 @@
 	margin-top: 10px;
 }
 
-#user-bio h5{
+#user-bio a h5{
 	margin: 0px;
 	font-weight: 600;
 	font-size: 23px;
 	color: #292f33;
 }
 
-#user-bio span{
+#user-bio a span{
 	font-size: 14px;
 	color: #66757f;
+}
+
+#user-bio a:hover h5, #user-bio a:hover span{
+	text-decoration: underline;
 }
 
 /*#profile-header-stats span{

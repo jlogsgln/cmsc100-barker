@@ -13,13 +13,18 @@
 	line-height: 15px;
 }
 
-#profile-card-info h6{
+#profile-card-info a h6{
 	margin: 0px;
 	font-weight: bolder;
 	font-size: 20px;
+	color: #292f33;
 }
 
-#profile-card-info span{
+#profile-card-info a:hover h6, #profile-card-info a:hover span{
+	text-decoration: underline;
+}
+
+#profile-card-info a span{
 	font-size: 14px;
 	color: #66757f;
 }
@@ -156,15 +161,20 @@
 	display: inline-block;
 }
 
-.tweeted-by h6{
+.tweeted-by a h6{
 	font-weight: bold;
 	margin:0px;
+	color: #292f33;
 }
 
-.tweeted-by span{
+.tweeted-by a span{
 	color: #66757f;
 	margin-left: 5px;
 
+}
+
+.tweeted-by a:hover h6, .tweeted-by a:hover span{
+	text-decoration: underline;
 }
 
 
