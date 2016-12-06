@@ -77,14 +77,14 @@
 	</div>
 </div>
 <div class="container" id="profile-contents">
-	<div class="row">
+	<div class="row" ng-model="logged_account">
 		<div class="col s3">
 			<div id="header-twitcon">
 				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
 			</div>
-			<div id="user-bio">
-				<h5>{{user_logged.fullname}}</h5>
-				<span>{{user_logged.username}}</span>
+			<div id="user-bio" ng-model="logged_account">
+				<h5>{{logged_account.fullname}}</h5>
+				<span>{{logged_account.username}}</span>
 			</div>
 		</div>
 		<div class="col s6">
