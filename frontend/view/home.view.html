@@ -157,4 +157,13 @@
           $('#char-count').text(140 - len);
         }
       };
+      $('#output').keyup(function(){
+    var thetext = $(this).val();
+
+    if (thetext.length >140) {
+        $('#tweetbox-post').attr('disabled', 'disabled');
+    } else {
+        $('#tweetbox-post').removeAttr('disabled');
+    }
+	});
 </script>
