@@ -16,7 +16,8 @@
 			handle: "",
 			password: "",
 			email: "",
-			followers: 0
+			followers: 0,
+			tweet: ""
 		}
 
 		$scope.sign_in = function(){
@@ -80,6 +81,7 @@
 				TwitterService
 					.signOut()
 					.then(function(res){
+						 console.log(res);
 						$window.location.href = '/#/sign_in';
 					}, function(err){
 						alert(err.statusText);
@@ -96,6 +98,46 @@
 				}, function(err){
 					alert(err.statusText);
 				})
+		}
+
+		$scope.get_logged = function(){
+			TwitterService
+				.getLogged()
+				.then(function(res){
+					$scope.user_logged = res;
+					console.log(res);
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
+		$scope.get_logged_info = function(){
+			TwitterService
+				.getLoggedInfo()
+				.then(function(res){
+					$scope.user_info = res[0];
+					console.log(res);
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
+		$scope.post_tweet = function(){
+			$scope.post_tweet_clicked = function(){
+				const data = {
+					tweet: $scope.tweet
+				}
+
+				console.log(data);
+				TwitterService
+					.postTweet(data)
+					.then(function(res){
+						alert(res.message);
+						$window.location.href = '/#/home';
+					}, function(err){
+						alert(err.statusText);
+					})
+			}
 		}
 
 
