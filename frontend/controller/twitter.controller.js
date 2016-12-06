@@ -98,6 +98,39 @@
 				})
 		}
 
+		$scope.get_users = function(){
+			TwitterService
+				.getUsers()
+				.then(function(res){
+					console.log(res);
+					$scope.users = res;
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
+		$scope.delete_tweets = function(id){
+			const data = {
+					tweetid: id
+				}
+
+			TwitterService
+				.deleteTweets(data)
+				.then(function(res){
+					console.log(res);
+				}, function(err){
+					alert(err.statusText);
+				})
+			TwitterService
+				.getTweets()
+				.then(function(res){
+					console.log(res);
+					$scope.tweets = res;
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
 
 
 	}

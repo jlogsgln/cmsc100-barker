@@ -86,10 +86,48 @@
 			return deferred.promise;
 		}
 
+		const getUsers = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'GET',
+				url: '/todo/get_users',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
+		const deleteTweets = function(data){
+			let deferred = $q.defer();
+			console.log(data)
+			$http({
+				method: 'DELETE',
+				params: data,
+				url: '/todo/delete_tweets',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+			return deferred.promise;
+		}
+
 
 		let service = {};
         service.createAccount = createAccount;
         service.signIn = signIn;
+        service.signOut = signOut;
+        service.getTweets = getTweets;
+        service.deleteTweets = deleteTweets;
+        service.getUsers = getUsers;
         return service;
 	}
 })();

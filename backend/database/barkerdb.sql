@@ -34,7 +34,7 @@ create table if not exists Replies(
 	tweetid int not null,
 	userid int not null,
 	constraint Replies_replyid_pk primary key(replyid),
-	constraint Tweets_tweetid_fk foreign key(tweetid) references Tweets(tweetid)
+	constraint Tweets_tweetid_fk foreign key(tweetid) references Tweets(tweetid) on delete cascade on update cascade
 );
 
 create table if not exists Followers(
@@ -74,10 +74,10 @@ insert into User (userid, user_full_name, user_handle, password, email, follower
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (1, 'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '2016-08-06', 191, 104, 7);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (2, 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', '2016-04-05', 485, 83, 24);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (3, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '2015-12-09', 1, 38, 6);
-insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (4, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2015-12-08', 308, 114, 27);
+insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (4, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2015-12-08', 308, 114, 17);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (5, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '2016-11-25', 164, 235, 17);
-insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (6, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2016-08-04', 131, 41, 29);
-insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (7, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', '2016-10-23', 490, 128, 47);
+insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (6, 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '2016-08-04', 131, 41, 19);
+insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (7, 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', '2016-10-23', 490, 128, 17);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (8, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '2016-10-24', 60, 443, 25);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (9, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', '2016-10-17', 39, 80, 2);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (10, 'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', '2016-03-11', 469, 5, 5);

@@ -15,12 +15,14 @@ exports.sign_in = function(req, res, next){
 		}else{
 			if(result.length != 0){
 				console.log("Successfully logged-in");
-				req.session.user = {
+				res.session.user = {
 					fullname: result[0].user_full_name,
 					username: result[0].user_handle,
 					password: result[0].password
-				};
-				return res.send(req.session.user);
+				}
+				res.session.save()
+
+				return res.send(res.session.user);
 			}
 			else{
 				return res.send({value: 0, message: 'Please try again!'});
@@ -58,12 +60,36 @@ exports.sign_out = function(req, res, next){
 	
 };
 
+exports.get_users = function(req, res, next){
+
+	console.log(req.query);
+	var query_string = 'SELECT * FROM User';
+	
+	db.query(query_string, [], function(err, result){
+		console.log(result);
+		res.send(result);
+	});
+};
+
 exports.get_tweets = function(req, res, next){
 
 	console.log(req.query);
-	var query_string = 'SELECT * FROM Tweets';
+	var query_string = 'SELECT * FROM Tweets NATURAL JOIN User';
 	
 	db.query(query_string, [], function(err, result){
+		console.log(result);
+		res.send(result);
+	});
+};
+
+exports.delete_tweets = function(req, res, next){
+
+	console.log(req.query);
+	var query_string = 'DELETE FROM Tweets where tweetid = ?';
+	var request_data = [req.query.tweetid];
+	
+	db.query(query_string, request_data, function(err, result){
+		console.log(result);
 		res.send(result);
 	});
 };

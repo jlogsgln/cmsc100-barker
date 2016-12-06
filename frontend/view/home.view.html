@@ -1,4 +1,4 @@
-<nav class="white darken-1">
+<nav class="white darken-1" ng-controller="TwitterCtrl">
 	<div class="nav-wrapper" >
 		
 		<ul class="tabs left hide-on-med-and-down "">
@@ -8,8 +8,12 @@
 		</ul>
 		<a href="#" class="brand-logo center"><i class="material-icons">polymer</i></a>
 		<ul class="right hide-on-med-and-down "  id="right-nav">
-			<li class="col s5" id="search-nav-container">
-				<input placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required>
+			<li class="col s5" id="search-nav-container" ng-init = "get_users()">
+				<input list="profiles" placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required ng-model = "search">
+				<datalist id = "profiles">
+					<option value="{{user.user_full_name}}" ng-repeat="user in users | filter:search"></option>
+				</datalist>
+				
 			</li>
 			<li class="col s1" id="icon-nav">
 				<img src="assets/images/user.jpg" alt="">
@@ -51,14 +55,14 @@
 			</div>
 		</div>
 		<div class="col l6">
-			<div class="card z-depth-0" id="tweetbox-timeline-container">
+			<div class="card z-depth-0" id="tweetbox-timeline-container" ng-init="get_tweets()">
 				<div class="user-twitcon">
 					<img src="assets/images/user.jpg" alt="">
 				</div>
 				<div id="tweetbox"><input placeholder="What's happening?" type="text" class="active validate"  required></div>
 			</div>
-			<div class="card z-depth-0" id="twitter-timeline-container">
-				<div class="col s12 tweet">
+			<div class="card z-depth-0" id="twitter-timeline-container" >
+				<div class="col s12 tweet" ng-repeat="tweet in tweets" >
 					<div class="col s1 tweeted-by-twitcon">
 						<div class="user-twitcon">
 							<img src="assets/images/user.jpg" alt="">
@@ -66,11 +70,11 @@
 					</div>
 					<div class="col s11 tweet-content">
 							<div class="col s12 tweeted-by">
-								<h6>Rain Tomista</h6>
-								<span>@raintomista</span>
+								<h6>{{tweet.user_full_name}}</h6>
+								<span>{{tweet.user_handle}}</span>
 							</div>
 							<div class="col s12 tweet-msg">
-								<p>I <3 U CLAUDS</p>
+								<p>{{tweet.tweet}}</p>
 							</div>
 							<div class="col s12 tweet-controls">
 								<div class="col s2">
@@ -79,14 +83,24 @@
 								</div>
 								<div class="col s2">
 									<i class="material-icons">repeat</i>
-									<span>10</span>
+									<span>{{tweet.tweet_retweets}}</span>
 								</div>
 								<div class="col s2">
 									<i class="material-icons">favorite</i>
-									<span>10</span>
+									<span>{{tweet.tweet_likes}}</span>
 								</div>
 								<div class="col s2">
 									<i class="material-icons">more_horiz</i>
+								</div>
+								<div class="col s2">
+									<button ng-click = "update_tweet()">
+									<i class="material-icons">mode_edit</i>
+									</button>
+								</div>
+								<div class="col s2">
+									<button ng-click = "delete_tweets(tweet.tweetid)">
+									<i class="material-icons">not_interested</i>
+									</button>
 								</div>
 							</div>
 					</div>

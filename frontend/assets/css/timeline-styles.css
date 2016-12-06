@@ -156,3 +156,7 @@
 .tweet-controls .col.s2 *{
 	vertical-align: middle;
 }
+
+.tweet {
+	background-color: white;
+}
