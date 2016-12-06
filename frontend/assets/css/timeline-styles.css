@@ -145,7 +145,7 @@
 }
 
 .col.tweet-content{
-	padding-left: 8px;
+	padding-left: 11px;
 }
 
 .col.tweeted-by{
@@ -159,6 +159,12 @@
 .tweeted-by h6{
 	font-weight: bold;
 	margin:0px;
+}
+
+.tweeted-by span{
+	color: #66757f;
+	margin-left: 5px;
+
 }
 
 
