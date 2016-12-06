@@ -95,10 +95,9 @@
 								<p>{{tweet.tweet}}</p>
 							</div>
 							<div class="col s12 tweet-controls">
-								<div class="col s2 tweet-ctrl-reply">
-									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Reply">
+								<div class="col s2 tweet-ctrl-more" ng-click="reply_tweet(tweet)">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Reply Tweet" data-target="modal2">
 										<i class="material-icons">reply</i>
-										<span></span>
 									</a>
 								</div>
 								<div class="col s2 tweet-ctrl-retweet">
@@ -108,13 +107,13 @@
 									</a>
 								</div>
 								<div class="col s2 tweet-ctrl-fave">
-									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Like">
+									<a href="" id="link" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Like">
 										<i class="material-icons" ng-click="like_tweet(tweet)">favorite</i>
 										<span>{{tweet.tweet_likes}}</span>
 									</a>
 								</div>
-								<div class="col s2 tweet-ctrl-more" ng-click="">
-									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Edit Tweet">
+								<div class="col s2 tweet-ctrl-more" ng-click="edit_tweet(tweet)">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Edit Tweet" data-target="modal1" >
 										<i class="material-icons">edit</i>
 									</a>
 								</div>
@@ -135,10 +134,43 @@
 		</div>
 		<div class="col s12 l3">
 			<div class="card z-depth-0" id="who-to-follow">
-				
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal Structure -->
+	  <div id="modal1" class="modal" >
+	    <div class="modal-content">
+	       <div class="col s11" id="tweetbox">
+				<textarea placeholder="What's your edit?" type="text" class="right active validate materialize-textarea" required ng-model="edit_tweet" id='output1' onkeyup="countChar(this)"></textarea>
+			</div>
+	    </div>
+	    <div class="modal-footer">
+			<div id="tweetbox-ctrls" class="right">
+				<span id="char-count1">140</span>
+				<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
+				<button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post1" ng-click="edit_tweet_clicked()" onclick="javascript:eraseText1(); Materialize.toast('Tweet edited!', 4000);" disabled>Tweet</button>
+			</div>
+	    </div>
+	  </div>
+
+	  <div id="modal2" class="modal" >
+	    <div class="modal-content">
+	       <div class="col s11" id="tweetbox">
+				<textarea placeholder="What's your reply?" type="text" class="right active validate materialize-textarea" required ng-model="reply_tweet" id='output2' onkeyup="countChar(this)"></textarea>
+			</div>
+	    </div>
+	    <div class="modal-footer">
+			<div id="tweetbox-ctrls" class="right">
+				<span id="char-count2">140</span>
+				<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
+				<button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post2" ng-click="reply_tweet_clicked()" onclick="javascript:eraseText1(); Materialize.toast('Tweet sent!', 4000);" disabled>Tweet</button>
+			</div>
+	    </div>
+	  </div>
+
+
+
 </div>
 </main>
 </main>
@@ -149,12 +181,38 @@
 	    document.getElementById("output").value = "";
 	}
 
+	function eraseText1() {
+	    document.getElementById("output1").value = "";
+	}
+
+	function eraseText1() {
+	    document.getElementById("output2").value = "";
+	}
+
 	function countChar(val) {
         var len = val.value.length;
         if (len >= 500) {
           val.value = val.value.substring(0, 140);
         } else {
           $('#char-count').text(140 - len);
+        }
+      };
+
+	function countChar(val) {
+        var len = val.value.length;
+        if (len >= 500) {
+          val.value = val.value.substring(0, 140);
+        } else {
+          $('#char-count1').text(140 - len);
+        }
+      };
+
+      function countChar(val) {
+        var len = val.value.length;
+        if (len >= 500) {
+          val.value = val.value.substring(0, 140);
+        } else {
+          $('#char-count2').text(140 - len);
         }
       };
      
@@ -167,4 +225,39 @@
 	        $('#tweetbox-post').removeAttr('disabled');
 	    }
 	});
+
+	$('#output1').keyup(function(){
+	    var thetext = $(this).val();
+
+	    if (thetext.length == 0 || thetext.length > 140) {
+	        $('#tweetbox-post1').attr('disabled', 'disabled');
+	    } else {
+	        $('#tweetbox-post1').removeAttr('disabled');
+	    }
+	});
+
+	$('#output2').keyup(function(){
+	    var thetext = $(this).val();
+
+	    if (thetext.length == 0 || thetext.length > 140) {
+	        $('#tweetbox-post2').attr('disabled', 'disabled');
+	    } else {
+	        $('#tweetbox-post2').removeAttr('disabled');
+	    }
+	});
+
+    $(function() {
+   		var links = $('a#link').click(function() {
+       	links.removeClass('inactive');
+       $(this).addClass('active');
+	       if(this.color == 'red') {
+	       	this.color = 'auto'
+	       }
+	   });
+	});
+
+	$(document).ready(function(){
+    	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+	    $('.modal').modal();
+	  });
 </script>

@@ -228,18 +228,102 @@
 				.likeTweet(data)
 				.then(function(res){
 					console.log(res);
+					
+					TwitterService
+						.getTweets()
+						.then(function(res){
+							console.log(res);
+							$scope.tweets = res;
+						}, function(err){
+							alert(err.statusText);
+						})
+
 				}, function(err){
 					console.log(err);
 				})
 
-			TwitterService
-				.getTweets()
-				.then(function(res){
-					console.log(res);
-					$scope.tweets = res;
-				}, function(err){
-					alert(err.statusText);
-				})
+			
+		}
+
+		$scope.edit_tweet = function(tweet){
+			console.log(tweet.tweet);
+
+			$scope.edit_tweet_clicked = function(){
+				
+				const data = {
+					tweet: $scope.edit_tweet,
+					tweet_id: tweet.tweetid
+				}
+
+				console.log($scope.edit_tweet);
+				TwitterService
+					.editTweet(data)
+					.then(function(res){
+						console.log(res.message);
+					}, function(err){
+						alert(err.statusText);
+					})
+				
+				TwitterService
+					.getTweetCount()
+					.then(function(res){
+						$scope.tweetcount = res[0];
+						console.log(res);
+					}, function(err){
+						alert(err.statusText);
+					})
+
+				TwitterService
+					.getTweets()
+					.then(function(res){
+						console.log(res);
+						$scope.tweets = res;
+					}, function(err){
+						alert(err.statusText);
+					})
+			}
+		}
+
+		$scope.reply_tweet = function(tweet){
+			console.log(tweet);
+
+			$scope.reply_tweet_clicked = function(tweet){
+				
+				const data = {
+					reply_tweet: $scope.reply_tweet,
+					tweet_id: tweet.tweetid,
+					user_id: $scope.logged_account.user_id,
+					likes: 0,
+					retweets: 0					
+				}
+
+				console.log($scope.edit_tweet);
+				TwitterService
+					.replyTweet(data)
+					.then(function(res){
+						console.log(res.message);
+					}, function(err){
+						alert(err.statusText);
+					})
+				
+				TwitterService
+					.getTweetCount()
+					.then(function(res){
+						$scope.tweetcount = res[0];
+						console.log(res);
+					}, function(err){
+						alert(err.statusText);
+					})
+
+				TwitterService
+					.getTweets()
+					.then(function(res){
+						console.log(res);
+						$scope.tweets = res;
+					}, function(err){
+						alert(err.statusText);
+					})
+			}
 		}
 
 	}

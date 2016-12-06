@@ -9,6 +9,7 @@ module.exports = function(router){
 	router.post('/todo/create_account', todo.create_account);
 	router.post('/todo/sign_out', todo.sign_out);
 	router.post('/todo/post_tweet', todo.post_tweet);
+	router.post('/todo/reply_tweet', todo.reply_tweet);
 
 	router.get('/todo/get_tweets', todo.get_tweets);
 	router.get('/todo/get_logged', todo.get_logged);
@@ -19,6 +20,7 @@ module.exports = function(router){
 	router.delete('/todo/delete_tweet', todo.delete_tweet);
 
 	router.put('/todo/like_tweet', todo.like_tweet);
+	router.put('/todo/edit_tweet', todo.edit_tweet);
 	
 
 	return router;
