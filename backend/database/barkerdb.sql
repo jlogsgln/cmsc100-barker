@@ -1,6 +1,6 @@
 -- CREATE USER 'project'@'localhost' IDENTIFIED BY 'tiger';
--- GRANT ALL ON project.* TO 'project'@'localhost';
 CREATE DATABASE barker;
+-- GRANT ALL ON project.* TO 'project'@'localhost';
 
 USE barker;
 
@@ -45,31 +45,40 @@ create table if not exists Follows(
 	constraint User_userid_followed_fk foreign key(userid_followed) references User(userid)
 );
 
-insert into User (userid, user_full_name, user_handle, password, email) values (1, 'Julia Fields', '@jfields0', 'yQ0QADp', 'jfields0@goo.gl');
-insert into User (userid, user_full_name, user_handle, password, email) values (2, 'Martha Burke', '@mburke1', 'CLORV15d8g', 'mburke1@ucoz.ru');
-insert into User (userid, user_full_name, user_handle, password, email) values (3, 'Jesse Mills', '@jmills2', 'YTZxaYs', 'jmills2@walmart.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (4, 'Bruce Bradley', '@bbradley3', '1P2ZXlX', 'bbradley3@shareasale.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (5, 'Frances Kelley', '@fkelley4', 'SIJ0igj4n', 'fkelley4@merriam-webster.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (6, 'Kenneth Franklin', '@kfranklin5', 'tvXG8aBVs', 'kfranklin5@mysql.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (7, 'Louis Ferguson', '@lferguson6', 'QODjTX', 'lferguson6@wordpress.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (8, 'Rachel Cook', '@rcook7', 'ZMuTcs', 'rcook7@forbes.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (9, 'Lois Jacobs', '@ljacobs8', '3SY4i1KofoLX', 'ljacobs8@shareasale.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (10, 'Eugene Hayes', '@ehayes9', 'N5a1MO7ZLO', 'ehayes9@photobucket.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (11, 'David Adams', '@dadamsa', 'cfkKtyK', 'dadamsa@ed.gov');
-insert into User (userid, user_full_name, user_handle, password, email) values (12, 'Carl Palmer', '@cpalmerb', 'LT1HWA4bDVD', 'cpalmerb@posterous.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (13, 'Virginia Holmes', '@vholmesc', 'NbE1Iw', 'vholmesc@google.nl');
-insert into User (userid, user_full_name, user_handle, password, email) values (14, 'Philip Medina', '@pmedinad', 'flM4byP1y', 'pmedinad@diigo.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (15, 'Stephen Jenkins', '@sjenkinse', 'Pyv3j69V', 'sjenkinse@clickbank.net');
-insert into User (userid, user_full_name, user_handle, password, email) values (16, 'Adam Andrews', '@aandrewsf', 'lw3SaDOV', 'aandrewsf@cnet.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (17, 'Joseph Morris', '@jmorrisg', 'lalyMZ', 'jmorrisg@mail.ru');
-insert into User (userid, user_full_name, user_handle, password, email) values (18, 'Kathleen Peters', '@kpetersh', 'aBrZpYkx2g', 'kpetersh@infoseek.co.jp');
-insert into User (userid, user_full_name, user_handle, password, email) values (19, 'Ronald Banks', '@rbanksi', 'uDMkm2', 'rbanksi@dagondesign.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (20, 'Elizabeth Rice', '@ericej', 'id6z2gzY1mf', 'ericej@nih.gov');
-insert into User (userid, user_full_name, user_handle, password, email) values (21, 'Antonio Ford', '@afordk', 'FF0B4AI', 'afordk@engadget.com');
-insert into User (userid, user_full_name, user_handle, password, email) values (22, 'Terry Hunter', '@thunterl', 'SS1L5IzuL', 'thunterl@princeton.edu');
-insert into User (userid, user_full_name, user_handle, password, email) values (23, 'Susan Berry', '@sberrym', 'Ek0sMn2dAd', 'sberrym@wikipedia.org');
-insert into User (userid, user_full_name, user_handle, password, email) values (24, 'Jesse Miller', '@jmillern', 'JsjMtCF0E', 'jmillern@redcross.org');
-insert into User (userid, user_full_name, user_handle, password, email) values (25, 'Joshua Lawrence', '@jlawrenceo', '8RUjuYqxD0SO', 'jlawrenceo@photobucket.com', 10);
+create table if not exists Likes(
+	likeid int auto_increment,
+	like_userid int not null,
+	liked_tweetid int not null,
+	constraint Likes_likeid_pk primary key(likeid),
+	constraint User_like_userid_fk foreign key(like_userid) references User(userid),
+	constraint Tweets_liked_tweetid_fk foreign key(liked_tweetid) references Tweets(tweetid)
+);
+
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (1, 'Julia Fields', '@jfields0', 'yQ0QADp', 'jfields0@goo.gl', 4);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (2, 'Martha Burke', '@mburke1', 'CLORV15d8g', 'mburke1@ucoz.ru', 8);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (3, 'Jesse Mills', '@jmills2', 'YTZxaYs', 'jmills2@walmart.com', 7);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (4, 'Bruce Bradley', '@bbradley3', '1P2ZXlX', 'bbradley3@shareasale.com', 2);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (5, 'Frances Kelley', '@fkelley4', 'SIJ0igj4n', 'fkelley4@merriam-webster.com', 6);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (6, 'Kenneth Franklin', '@kfranklin5', 'tvXG8aBVs', 'kfranklin5@mysql.com', 6);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (7, 'Louis Ferguson', '@lferguson6', 'QODjTX', 'lferguson6@wordpress.com', 9);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (8, 'Rachel Cook', '@rcook7', 'ZMuTcs', 'rcook7@forbes.com', 2);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (9, 'Lois Jacobs', '@ljacobs8', '3SY4i1KofoLX', 'ljacobs8@shareasale.com', 7);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (10, 'Eugene Hayes', '@ehayes9', 'N5a1MO7ZLO', 'ehayes9@photobucket.com', 8);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (11, 'David Adams', '@dadamsa', 'cfkKtyK', 'dadamsa@ed.gov', 7);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (12, 'Carl Palmer', '@cpalmerb', 'LT1HWA4bDVD', 'cpalmerb@posterous.com', 10);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (13, 'Virginia Holmes', '@vholmesc', 'NbE1Iw', 'vholmesc@google.nl', 8);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (14, 'Philip Medina', '@pmedinad', 'flM4byP1y', 'pmedinad@diigo.com', 3);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (15, 'Stephen Jenkins', '@sjenkinse', 'Pyv3j69V', 'sjenkinse@clickbank.net', 7);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (16, 'Adam Andrews', '@aandrewsf', 'lw3SaDOV', 'aandrewsf@cnet.com', 4);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (17, 'Joseph Morris', '@jmorrisg', 'lalyMZ', 'jmorrisg@mail.ru', 7);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (18, 'Kathleen Peters', '@kpetersh', 'aBrZpYkx2g', 'kpetersh@infoseek.co.jp', 2);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (19, 'Ronald Banks', '@rbanksi', 'uDMkm2', 'rbanksi@dagondesign.com', 2);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (20, 'Elizabeth Rice', '@ericej', 'id6z2gzY1mf', 'ericej@nih.gov', 3);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (21, 'Antonio Ford', '@afordk', 'FF0B4AI', 'afordk@engadget.com', 3);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (22, 'Terry Hunter', '@thunterl', 'SS1L5IzuL', 'thunterl@princeton.edu', 3);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (23, 'Susan Berry', '@sberrym', 'Ek0sMn2dAd', 'sberrym@wikipedia.org', 4);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (24, 'Jesse Miller', '@jmillern', 'JsjMtCF0E', 'jmillern@redcross.org', 10);
+insert into User (userid, user_full_name, user_handle, password, email, followers) values (25, 'Joshua Lawrence', '@jlawrenceo', '8RUjuYqxD0SO', 'jlawrenceo@photobucket.com', 10);
 
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (1, 'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '2016-08-06', 191, 104, 7);
 insert into Tweets (tweetid, tweet, tweet_time, tweet_likes, tweet_retweets, userid) values (2, 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', '2016-04-05', 485, 83, 24);

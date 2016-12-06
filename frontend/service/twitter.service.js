@@ -154,6 +154,23 @@
 			return deferred.promise;
 		}
 
+		const getFollowingCount = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'GET',
+				url: '/todo/get_followingcount',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
 		const postTweet = function(data){
 			let deferred = $q.defer();
 
@@ -191,6 +208,25 @@
 			return deferred.promise;
 		}
 
+		const likeTweet = function(data){
+			let deferred = $q.defer();
+
+			console.log(data);
+			$http({
+				method: 'PUT',
+				params: data,
+				url: '/todo/like_tweet',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
 		let service = {};
         service.createAccount = createAccount;
         service.signIn = signIn;
@@ -199,8 +235,10 @@
         service.getLogged = getLogged;
         service.getTweetCount = getTweetCount;
         service.getFollowersCount = getFollowersCount;
+        service.getFollowingCount = getFollowingCount;
         service.postTweet = postTweet;
         service.deleteTweet = deleteTweet;
+        service.likeTweet = likeTweet;
         return service;
 	}
 })();
