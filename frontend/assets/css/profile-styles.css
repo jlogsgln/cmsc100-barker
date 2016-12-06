@@ -1,0 +1,139 @@
+
+
+#header{
+	width: 100hh;
+	height: 320px;
+	background-image: url('../images/header.jpg');
+	background-size: cover;
+}
+
+
+#profile-ctrl{
+	height: 60px;
+	border: 1px solid #e1e8ed;
+
+}
+
+
+#profile-ctrl .container .row{
+	margin: 0px;
+}
+
+#profile-header-stats .tabs, #profile-header-stats .tabs .tab{
+	height: 60px;
+}
+
+#profile-header-stats .tabs a{
+	line-height: 60px;
+}
+
+#profile-header-stats .tabs .indicator{
+	height: 4px;
+}
+
+#profile-header-stats .tabs .profile-stats span{
+	margin: 0px;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #66757f;
+	display: block;
+	text-align: center;
+	line-height: 18px;	
+}
+
+#profile-header-stats .tabs .profile-stats .stat-bold{
+	margin: 0px;
+	font-weight: 400;
+	font-size: 18px;
+	color: black;
+}
+
+.profile-stats{
+	padding:12px 0px;
+}
+
+#profile-follow{
+	padding: 10px 0px;
+}
+
+#follow-btn{
+	background-color: transparent;
+	color: #292f33;
+	font-weight: 500;
+	height: 40px;
+	padding: 0px 25px;
+	font-size: 15px;
+	border-radius: 6px;
+	text-transform: capitalize;
+	margin: 0px;
+	margin-left: 10px;
+	border: 1px solid #e1e8ed;
+	float: right;
+}
+
+.waves-effect.waves-follow .waves-ripple {
+ /* The alpha value allows the text and background color
+ of the button to still show through. */
+  background-color: #039be5;
+}
+
+
+#header-twitcon{
+	height: 222px;
+	width: 222px;
+	background-color: white;
+	padding: 5px;
+	border-radius: 9px;
+	border: 1px solid #e1e8ed;
+	margin-top: -180px;
+
+}
+
+#header-twitcon-container{
+	padding-left: 0px;
+}
+
+
+#header-twitcon img{
+	height: 210px;
+	border-radius: 9px;
+
+}
+
+#profile-contents{
+	margin-top: 10px;
+}
+
+
+#user-bio{
+	margin-left: 5px;
+	line-height: 20px;
+	margin-top: 10px;
+}
+
+#user-bio h5{
+	margin: 0px;
+	font-weight: 600;
+	font-size: 23px;
+	color: #292f33;
+}
+
+#user-bio span{
+	font-size: 14px;
+	color: #66757f;
+}
+
+/*#profile-header-stats span{
+	margin: 0px;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+	color: #66757f;
+	display: block;
+	text-align: center;
+	line-height: 18px;	
+
+
+}
+
