@@ -113,15 +113,20 @@
 										<span>{{tweet.tweet_likes}}</span>
 									</a>
 								</div>
+								<div class="col s2 tweet-ctrl-more" ng-click="">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Edit Tweet">
+										<i class="material-icons">edit</i>
+									</a>
+								</div>
 								<div class="col s2 tweet-ctrl-more" ng-click="delete_tweet(tweet)">
-									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Delete Tweet">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Delete Tweet" onclick="Materialize.toast('Tweet deleted!', 4000)">
 										<i class="material-icons">delete</i>
 									</a>
-									<ul id='more-dropdown' class='dropdown-content z-depth-0' >
-										<li><a href="#!">Edit Tweet</a></li>
+									<!-- <ul id='more-dropdown' class='dropdown-content z-depth-0' >
+										<li><a href="#!">Delete Tweet</a></li>
 										<li class="divider"></li>
 										<li><a href="#!" onclick="Materialize.toast('Tweet deleted!', 4000)">Delete Tweet</a></li>
-									</ul>
+									</ul> -->
 								</div>
 							</div>
 					</div>
