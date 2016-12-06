@@ -135,10 +135,18 @@
 					.postTweet(data)
 					.then(function(res){
 						//alert(res.message);
-						$window.location.reload();
+						// $window.location.reload();
 					}, function(err){
 						alert(err.statusText);
 					})
+				TwitterService
+				.getTweets()
+				.then(function(res){
+					console.log(res);
+					$scope.tweets = res;
+				}, function(err){
+					alert(err.statusText);
+				})
 			}
 		}
 
