@@ -64,7 +64,7 @@
 					</div>	
 				</div>
 				<div class="col s11" id="tweetbox">
-					<textarea placeholder="What's happening?" type="text" class="right active validate materialize-textarea" required ng-model="tweet" ng-init="post_tweet()" id='output' onkeyup="countChar(this)"></textarea>
+					<textarea placeholder="What's happening?" type="text" class="right active validate materialize-textarea" required ng-model="tweet" ng-init="post_tweet()" id='tweetbox-textarea' onkeyup="countChar(this)"></textarea>
 					<div id="tweetbox-ctrls" class="right">
 						<span id="char-count">140</span>
 						<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
@@ -145,26 +145,45 @@
 <script type="text/javascript" src="assets/js/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="assets/js/materialize.min.js"></script>
 <script type="text/javascript">
-	function eraseText() {
-	    document.getElementById("output").value = "";
-	}
+	$(document).ready(function() {
+	    var limit = 140;
 
-	function countChar(val) {
-        var len = val.value.length;
-        if (len >= 500) {
-          val.value = val.value.substring(0, 140);
-        } else {
-          $('#char-count').text(140 - len);
-        }
-      };
-     
-    $('#output').keyup(function(){
-	    var thetext = $(this).val();
+	    var $counter = $('#char-count').text(limit);
+	    var $input = $('#tweetbox-textarea').keyup(function() {
 
-	    if (thetext.length == 0 || thetext.length > 140) {
+	        var left = limit - $(this).val().length;
+	        $counter.toggleClass("overlimit", left < 0).text(left);
+	    });
+
+
+
+
+		$('#tweetbox-textarea').keyup(function() {
+		    var thetext = $(this).val();
+
+		    if (thetext.length > 140) {
+		        $('#tweetbox-post').attr('disabled', 'disabled');
+		        $('#char-count').css( "color", "#e81c4f" );
+
+		    }else if(thetext.length == 0){
+		        $('#tweetbox-post').attr('disabled', 'disabled');
+		    }
+
+
+		    else {
+		        $('#tweetbox-post').removeAttr('disabled');
+		        $('#char-count').css( "color", "#66757f" );
+		        
+		        
+		    }
+		});
+
+
+	    $('#tweetbox-post').click(function() {
+	        var val = $input.val();
 	        $('#tweetbox-post').attr('disabled', 'disabled');
-	    } else {
-	        $('#tweetbox-post').removeAttr('disabled');
-	    }
+	        $input.val('');
+	        $counter.text(limit).removeClass('overlimit');
+	    })
 	});
 </script>
