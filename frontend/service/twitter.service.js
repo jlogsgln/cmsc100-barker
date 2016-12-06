@@ -86,10 +86,66 @@
 			return deferred.promise;
 		}
 
+		const getLogged = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'GET',
+				url: '/todo/get_logged',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
+		const getLoggedInfo = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'GET',
+				url: '/todo/get_logged_info',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
+		const postTweet = function(data){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'POST',
+				params: data,
+				url: '/todo/post_tweet',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
 
 		let service = {};
         service.createAccount = createAccount;
         service.signIn = signIn;
+        service.signOut = signOut;
+        service.getTweets = getTweets;
+        service.getLogged = getLogged;
+        service.getLoggedInfo = getLoggedInfo;
+        service.postTweet = postTweet;
         return service;
 	}
 })();

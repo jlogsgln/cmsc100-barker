@@ -16,7 +16,10 @@
 			handle: "",
 			password: "",
 			email: "",
-			followers: 0
+			followers: 0,
+			tweet: "",
+			tweet_likes: 0,
+			tweet_retweets: 0
 		}
 
 		$scope.sign_in = function(){
@@ -38,11 +41,9 @@
 						}
 						else{
 							alert(res.message);
-							$window.location.href = '/#/sign_in';
 						}
 					}, function(err){
-						$window.location.href = '/#/sign_in';
-
+						$window.location.reload();
 					})
 			}
 		}
@@ -63,10 +64,10 @@
 					.then(function(res) {
 						if(res.status != 500){
 		            		alert(res.message);
-		            		$window.location.href = '/#/sign_in';
+		            		$window.location.reload();
 		            	}else{
 		            		alert(res.statusText);
-		            		$window.location.href = '/#/sign_in';
+		            		$window.location.reload();
 		            	}
 	                }, function(err) {
 	                    console.log(err);
@@ -80,6 +81,7 @@
 				TwitterService
 					.signOut()
 					.then(function(res){
+						 console.log(res);
 						$window.location.href = '/#/sign_in';
 					}, function(err){
 						alert(err.statusText);
@@ -96,6 +98,48 @@
 				}, function(err){
 					alert(err.statusText);
 				})
+		}
+
+		$scope.get_logged = function(){
+			TwitterService
+				.getLogged()
+				.then(function(res){
+					$scope.user_logged = res;
+					console.log(res);
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
+		$scope.get_logged_info = function(){
+			TwitterService
+				.getLoggedInfo()
+				.then(function(res){
+					$scope.user_info = res[0];
+					console.log(res);
+				}, function(err){
+					alert(err.statusText);
+				})
+		}
+
+		$scope.post_tweet = function(){
+			$scope.post_tweet_clicked = function(){
+				const data = {
+					tweet: $scope.tweet,
+					likes: $scope.tweet_likes,
+					retweets: $scope.tweet_retweets
+				}
+
+				console.log(data);
+				TwitterService
+					.postTweet(data)
+					.then(function(res){
+						//alert(res.message);
+						$window.location.reload();
+					}, function(err){
+						alert(err.statusText);
+					})
+			}
 		}
 
 
