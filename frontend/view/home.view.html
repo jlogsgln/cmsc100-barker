@@ -68,7 +68,7 @@
 					<div id="tweetbox-ctrls" class="right">
 						<span id="char-count">140</span>
 						<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
-						<button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="javascript:eraseText(); Materialize.toast('Tweet sent!', 4000);">Tweet</button>
+						<button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="javascript:eraseText(); Materialize.toast('Tweet sent!', 4000);" disabled>Tweet</button>
 					</div>
 				</div>
 
@@ -160,7 +160,7 @@
       $('#output').keyup(function(){
     var thetext = $(this).val();
 
-    if (thetext.length >140) {
+    if (thetext.length == 0 || thetext.length >= 140) {
         $('#tweetbox-post').attr('disabled', 'disabled');
     } else {
         $('#tweetbox-post').removeAttr('disabled');
