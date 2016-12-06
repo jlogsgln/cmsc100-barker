@@ -111,6 +111,16 @@
 				})
 		}
 
+		$scope.get_users = function(){
+			TwitterService
+				.getUsers()
+				.then(function(res){
+					console.log(res);
+					$scope.users = res;
+					}, function(err){
+					alert(err.statusText);
+				})
+		}
 
 		$scope.get_tweetcount = function(){
 			TwitterService

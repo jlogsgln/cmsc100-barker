@@ -114,6 +114,17 @@ exports.post_tweet = function(req, res, next){
 	});
 };
 
+exports.get_users = function(req, res, next){
+
+	console.log(req.query);
+	var query_string = 'SELECT * FROM User';
+	
+	db.query(query_string, [], function(err, result){
+		console.log(result);
+		res.send(result);
+	});
+};
+
 
 exports.delete_tweet = function(req, res, next){
 	

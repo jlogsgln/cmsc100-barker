@@ -10,6 +10,7 @@ module.exports = function(router){
 	router.post('/todo/sign_out', todo.sign_out);
 	router.post('/todo/post_tweet', todo.post_tweet);
 
+	router.get('/todo/get_users', todo.get_users);
 	router.get('/todo/get_tweets', todo.get_tweets);
 	router.get('/todo/get_logged', todo.get_logged);
 	router.get('/todo/get_tweetcount', todo.get_tweetcount);

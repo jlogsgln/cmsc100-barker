@@ -154,6 +154,23 @@
 			return deferred.promise;
 		}
 
+		const getUsers = function(){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'GET',
+				url: '/todo/get_users',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
 		const postTweet = function(data){
 			let deferred = $q.defer();
 
@@ -200,6 +217,7 @@
         service.getTweetCount = getTweetCount;
         service.getFollowersCount = getFollowersCount;
         service.postTweet = postTweet;
+        service.getUsers = getUsers;
         service.deleteTweet = deleteTweet;
         return service;
 	}

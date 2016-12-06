@@ -9,8 +9,12 @@
 		</ul>
 		<a href="#" class="brand-logo center"><i class="material-icons">polymer</i></a>
 		<ul class="right hide-on-med-and-down "  id="right-nav">
-			<li class="col s5" id="search-nav-container">
-				<input placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required>
+			<li class="col s5" id="search-nav-container" ng-init = "get_users()">
+				<input list="profiles" placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required ng-model = "search">
+				<datalist id = "profiles">
+					<option value="{{user.user_full_name}}" ng-repeat="user in users | filter:search"></option>
+				</datalist>
+				
 			</li>
 			<li class="col s1" id="icon-nav">
 				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
