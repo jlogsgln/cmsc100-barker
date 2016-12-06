@@ -13,7 +13,12 @@
 				<input placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required>
 			</li>
 			<li class="col s1" id="icon-nav">
-				<img src="assets/images/user.jpg" alt="">
+				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
+				<ul id='nav-dropdown' class='dropdown-content z-depth-0' >
+					<li><a href="#!">View Profile</a></li>
+					<li class="divider"></li>
+					<li><a href="#!">Logout</a></li>
+				</ul>
 			</li>
 			<li class="col s3" ng-init="sign_out()">
 				<button class="btn waves-effect waves-teal" id="compose-nav"  ng-click="sign_out_clicked()">Tweet</button>
@@ -53,11 +58,22 @@
 		</div>
 		<div class="col l6">
 			<div class="card z-depth-0" id="tweetbox-timeline-container" ng-init="get_tweets()">
-				<div class="user-twitcon">
-					<img src="assets/images/user.jpg" alt="">
+				<div class="col s1">
+					<div class="user-twitcon">
+						<img src="assets/images/user.jpg" alt="">
+					</div>	
 				</div>
-				<div id="tweetbox"><input placeholder="What's happening?" type="text" class="active validate"  required ng-model="tweet" ng-init="post_tweet()"></div>
-				<button class="btn waves-effect waves-teal" id="compose-nav"  ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button>
+				<div class="col s11" id="tweetbox">
+					<textarea placeholder="What's happening?" type="text" class="right active validate materialize-textarea" required ng-model="tweet" ng-init="post_tweet()"></textarea>
+					<div id="tweetbox-ctrls" class="right">
+						<span id="char-count">140</span>
+						<button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button>
+					</div>
+				</div>
+
+
+				<!-- <div id="tweetbox"><input placeholder="What's happening?" type="text" class="active validate"  required ng-model="tweet" ng-init="post_tweet()"></div>
+				<button class="btn waves-effect waves-teal" id="compose-nav"  ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
 			</div>
 			<div class="card z-depth-0" id="twitter-timeline-container">
 				<div class="card z-depth-0 col s12 tweet" ng-repeat="tweet in tweets">
@@ -66,29 +82,48 @@
 							<img src="assets/images/user.jpg" alt="">
 						</div>
 					</div>
+
+
+
 					<div class="col s11 tweet-content">
-							<div class="col s12 tweeted-by">
+							<div class="col s8 tweeted-by">
 								<h6>{{tweet.user_full_name}}</h6>
 								<span>{{tweet.user_handle}}</span>
+							</div>
+							<div class="col s4 tweet-timestamp">
+								<span class="right">{{tweet.tweet_time | date:'medium'}} </span>
 							</div>
 							<div class="col s12 tweet-msg">
 								<p>{{tweet.tweet}}</p>
 							</div>
 							<div class="col s12 tweet-controls">
-								<div class="col s2">
-									<i class="material-icons">call_missed</i>
-									<span>2</span>
+								<div class="col s2 tweet-ctrl-reply">
+									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Reply">
+										<i class="material-icons">reply</i>
+										<span>2</span>
+									</a>
 								</div>
-								<div class="col s2">
-									<i class="material-icons">repeat</i>
-									<span>{{tweet.tweet_retweets}}</span>
+								<div class="col s2 tweet-ctrl-retweet">
+									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Retweet">
+										<i class="material-icons">repeat</i>
+										<span>{{tweet.tweet_retweets}}</span>
+									</a>
 								</div>
-								<div class="col s2">
-									<i class="material-icons">favorite</i>
-									<span>{{tweet.tweet_likes}}</span>
+								<div class="col s2 tweet-ctrl-fave ctrl-active">
+									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Like">
+										<i class="material-icons">favorite</i>
+										<span>{{tweet.tweet_likes}}</span>
+									</a>
 								</div>
-								<div class="col s2">
-									<i class="material-icons">more_horiz</i>
+								<div class="col s2 tweet-ctrl-more"" >
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="More" data-activates='more-dropdown'>
+										<i class="material-icons">more_horiz</i>
+									</a>
+									<ul id='more-dropdown' class='dropdown-content z-depth-0' >
+										<li><a href="#!">Edit Tweet</a></li>
+										<li class="divider"></li>
+										<li><a href="#!">Delete Tweet</a></li>
+									</ul>
 								</div>
 							</div>
 					</div>
