@@ -16,7 +16,6 @@
 			handle: "",
 			password: "",
 			email: "",
-			followers: 0,
 			tweet: "",
 			tweet_likes: 0,
 			tweet_retweets: 0
@@ -54,8 +53,7 @@
 					fullname: $scope.fullname,
 					handle: $scope.username,
 					email: $scope.email,
-					password: $scope.password,
-					followers: 0
+					password: $scope.password
 				}
 
 				console.log(data);

@@ -34,8 +34,8 @@ exports.sign_in = function(req, res, next){
 exports.create_account = function(req, res, next){
 
 	//console.log(req.query);
-	var query_string = 'INSERT INTO User(user_full_name, user_handle, password, email, followers) VALUES(?,?,?,?,?)';
-	var request_data = [req.query.fullname, req.query.handle, req.query.password, req.query.email, req.query.followers];
+	var query_string = 'INSERT INTO User(user_full_name, user_handle, password, email) VALUES(?,?,?,?)';
+	var request_data = [req.query.fullname, req.query.handle, req.query.password, req.query.email];
 
 	db.query(query_string, request_data, function(err, result){
 		if(err){
@@ -87,7 +87,7 @@ exports.get_tweetcount = function(req, res, next){
 
 exports.get_followerscount = function(req, res, next){
 	
-	var query_string = 'SELECT count(f.followerid) followerscount FROM Followers f WHERE f.userid = ?';
+	var query_string = 'SELECT count(f.userid_follows) followerscount FROM Follows f WHERE f.userid_followed = ?';
 	var request_data = [req.session.user.user_id];
 
 	db.query(query_string, request_data, function(err, result){

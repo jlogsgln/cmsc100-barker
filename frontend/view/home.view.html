@@ -7,7 +7,7 @@
 			<li class="tab col s3"><a href="#test2">Notifications</a></li>
 			<li class="tab col s3"><a href="#test3">Message</a></li>
 		</ul>
-		<a href="#" class="brand-logo center"><i class="material-icons">polymer</i></a>
+		<a href="/#/home" class="brand-logo center"><i class="material-icons">polymer</i></a>
 		<ul class="right hide-on-med-and-down "  id="right-nav">
 			<li class="col s5" id="search-nav-container">
 				<input placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required>
@@ -160,7 +160,7 @@
       $('#output').keyup(function(){
     var thetext = $(this).val();
 
-    if (thetext.length == 0 || thetext.length >= 140) {
+    if (thetext.length == 0 || thetext.length > 140) {
         $('#tweetbox-post').attr('disabled', 'disabled');
     } else {
         $('#tweetbox-post').removeAttr('disabled');
