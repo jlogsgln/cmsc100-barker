@@ -241,7 +241,6 @@
 
 			return deferred.promise;
 		}
-
 		const editTweet = function(data){
 			let deferred = $q.defer();
 
@@ -295,9 +294,6 @@
 
 		// 	return deferred.promise;
 		// }
-
-
-
 
 		let service = {};
         service.createAccount = createAccount;

@@ -18,13 +18,9 @@ module.exports = function(router){
 	router.get('/todo/get_tweetcount', todo.get_tweetcount);
 	router.get('/todo/get_followerscount', todo.get_followerscount);
 	router.get('/todo/get_followingcount', todo.get_followingcount);
-
-
 	router.delete('/todo/delete_tweet', todo.delete_tweet);
 
 	router.put('/todo/like_tweet', todo.like_tweet);
 	router.put('/todo/edit_tweet', todo.edit_tweet);
-	
-
 	return router;
 };

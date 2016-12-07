@@ -405,5 +405,22 @@
 		// 		})
 		// }
 
+		// 	TwitterService
+		// 		.likeTweet(data)
+		// 		.then(function(res){
+		// 			console.log(res);
+		// 		}, function(err){
+		// 			console.log(err);
+		// 		})
+
+		// 	TwitterService
+		// 		.getTweets()
+		// 		.then(function(res){
+		// 			console.log(res);
+		// 			$scope.tweets = res;
+		// 		}, function(err){
+		// 			alert(err.statusText);
+		// 		})
+		// }
 	}
 })();

@@ -213,10 +213,8 @@
 		function eraseText3() {
 		    document.getElementById("#textarea3").value = "";
 		}
-
-	$(document).ready(function() {
 		
-
+	$(document).ready(function() {
 	    var limit = 140;
 
 	    var $counter = $('#char-count').text(limit);
@@ -246,9 +244,6 @@
 			var left = limit - $(this).val().length;
 	        $counter3.toggleClass("overlimit", left < 0).text(left);
 	    });
-
-
-
 
 		$('#tweetbox-textarea').keyup(function() {
 		    var thetext = $(this).val();
@@ -328,8 +323,7 @@
 		        
 		        
 		    }
-		});
-
+		})
 
 	    $('#tweetbox-post').click(function() {
 	        var val = $input.val();
