@@ -242,6 +242,63 @@
 			return deferred.promise;
 		}
 
+		const editTweet = function(data){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'PUT',
+				params: data,
+				url: '/todo/edit_tweet',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
+		const replyTweet = function(data){
+			let deferred = $q.defer();
+
+			$http({
+				method: 'POST',
+				params: data,
+				url: '/todo/reply_tweet',
+				headers: headers
+			})
+			.then((res) => {
+				deferred.resolve(res.data);
+			}, (err) => {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+		}
+
+		// const searchUser = function(data){
+		// 	let deferred = $q.defer();
+
+		// 	$http({
+		// 		method: 'POST',
+		// 		params: data,
+		// 		url: '/todo/search_user',
+		// 		headers: headers
+		// 	})
+		// 	.then((res) => {
+		// 		deferred.resolve(res.data);
+		// 	}, (err) => {
+		// 		deferred.reject(err);
+		// 	});
+
+		// 	return deferred.promise;
+		// }
+
+
+
+
 		let service = {};
         service.createAccount = createAccount;
         service.signIn = signIn;
@@ -255,6 +312,9 @@
         service.getUsers = getUsers;
         service.deleteTweet = deleteTweet;
         service.likeTweet = likeTweet;
+        service.editTweet = editTweet;
+        service.replyTweet = replyTweet;
+        // service.searchUser = searchUser;
         return service;
 	}
 })();

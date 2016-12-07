@@ -209,3 +209,63 @@ exports.like_tweet = function(req, res, next){
 		}
 	});
 };
+
+exports.edit_tweet = function(req, res, next){
+
+	console.log(req.query);
+	var query_string = 'UPDATE Tweets SET tweet = ? WHERE tweetid=?';
+	var request_data = [req.query.tweet, req.query.tweet_id];
+
+	db.query(query_string, request_data, function(err, result){
+		if(err){
+			console.log(err);
+			return res.status(500).send(err);
+		}else{
+			return res.send({message: 'Tweet edited.'});
+		}
+	});
+};
+
+exports.reply_tweet = function(req, res, next){
+
+	//console.log(req.query);
+	var query_string = 'INSERT INTO Replies(reply,reply_time,reply_likes,reply_retweets,tweetid,userid) VALUES(?,now(),?,?,?,?)';
+	var request_data = [req.query.reply_tweet, req.query.likes, req.query.retweets, req.query.tweet_id, req.query.user_id];
+
+	db.query(query_string, request_data, function(err, result){
+		if(err){
+			console.log(err);
+			return res.status(500).send(err);
+		}else{
+			return res.send({message: 'Tweet replied.'});
+		}
+	});
+};
+
+exports.search_users = function(req, res, next){
+
+	console.log(req.query);
+	var query_string = 'SELECT * FROM User WHERE user_full_name=? OR user_handle=?';
+	var request_data = [req.query.user]
+	
+	db.query(query_string, request_data, function(err, result){
+		if(err){
+			console.log(err);
+			return res.status(500).send(err);
+		}
+		else{
+			if(result){
+				console.log(result);
+				req.session.searched = {
+					user_id: result[0].userid,
+					fullname: result[0].user_full_name,
+					username: result[0].user_handle,
+					password: result[0].password,
+					email: result[0].email
+				};
+				req.session.save();
+				res.send(req.session.searched);
+			}
+		}
+	});
+};

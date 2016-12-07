@@ -21,6 +21,16 @@
 			tweet_retweets: 0
 		}
 
+
+		$scope.link_home = function(){
+			$window.location.href = '/#/home';
+		}
+
+		$scope.link_profile = function(){
+			$window.location.href = '/#/profile';
+		}
+
+
 		$scope.sign_in = function(){
 			$scope.sign_in_clicked = function(){
 				const data = {
@@ -190,6 +200,43 @@
 			}
 		}
 
+		$scope.post_tweet2 = function(){
+			$scope.post_tweet2_clicked = function(){
+				const data = {
+					tweet: $scope.tweet2,
+					likes: 0,
+					retweets: 0
+				}
+
+				console.log(data);
+				TwitterService
+					.postTweet(data)
+					.then(function(res){
+						console.log(res.message);
+					}, function(err){
+						alert(err.statusText);
+					})
+				
+				TwitterService
+					.getTweetCount()
+					.then(function(res){
+						$scope.tweetcount = res[0];
+						console.log(res);
+					}, function(err){
+						alert(err.statusText);
+					})
+
+				TwitterService
+					.getTweets()
+					.then(function(res){
+						console.log(res);
+						$scope.tweets = res;
+					}, function(err){
+						alert(err.statusText);
+					})
+			}
+		}
+
 		$scope.delete_tweet = function(tweet) { 
 			var index = $scope.tweets.indexOf(tweet)
 			var tweet = $scope.tweets[index];
@@ -238,19 +285,125 @@
 				.likeTweet(data)
 				.then(function(res){
 					console.log(res);
+
+
+				TwitterService
+					.getTweets()
+					.then(function(res){
+						console.log(res);
+						$scope.tweets = res;
+					}, function(err){
+						alert(err.statusText);
+					})
+
 				}, function(err){
 					console.log(err);
 				})
 
-			TwitterService
-				.getTweets()
-				.then(function(res){
-					console.log(res);
-					$scope.tweets = res;
-				}, function(err){
-					alert(err.statusText);
-				})
 		}
+
+		$scope.edit_tweet = function(tweet){
+			$scope.edit_tweet_clicked = function(tweets){
+				var index = $scope.tweets.indexOf(tweet)
+				var tweety = $scope.tweets[index];
+				console.log(tweety);
+				console.log(tweets);
+
+				const data = {
+					tweet: tweets,
+					tweet_id: tweety.tweetid
+				}
+
+				TwitterService
+					.editTweet(data)
+					.then(function(res){
+						console.log(res.message);
+					}, function(err){
+						alert(err.statusText);
+					})
+				
+				TwitterService
+					.getTweetCount()
+					.then(function(res){
+						$scope.tweetcount = res[0];
+						console.log(res);
+					}, function(err){
+						alert(err.statusText);
+					})
+
+				TwitterService
+					.getTweets()
+					.then(function(res){
+						console.log(res);
+						$scope.tweets = res;
+					}, function(err){
+						alert(err.statusText);
+					})
+			}
+		}
+
+		$scope.reply_tweet = function(tweet){
+			$scope.reply_tweet_clicked = function(tweets){
+				var index = $scope.tweets.indexOf(tweet)
+				var tweety = $scope.tweets[index];
+				console.log(tweety);
+				console.log(tweets);
+
+				const data = {
+					reply_tweet: tweets,
+					tweet_id: tweety.tweetid,
+					user_id: $scope.logged_account.user_id,
+					likes: 0,
+					retweets: 0					
+				}
+
+				console.log(data);
+				TwitterService
+					.replyTweet(data)
+					.then(function(res){
+						console.log(res.message);
+					}, function(err){
+						alert(err.statusText);
+					})
+				
+				TwitterService
+					.getTweetCount()
+					.then(function(res){
+						$scope.tweetcount = res[0];
+						console.log(res);
+					}, function(err){
+						alert(err.statusText);
+					})
+
+				TwitterService
+					.getTweets()
+					.then(function(res){
+						console.log(res);
+						$scope.tweets = res;
+					}, function(err){
+						alert(err.statusText);
+					})
+			}
+		}
+
+		// $scope.search_user = function(user){
+		// 	var user =  $scope.search;
+		// 	console.log(user);
+		// 	TwitterService
+		// 		.searchUser(user)
+		// 		.then(function(res){
+		// 			console.log(res);
+		// 			if(res != null){
+		// 				$window.location.href = '/#/otherusers';
+		// 			}
+		// 			else{
+		// 				$window.location.href = '/#/home';	
+		// 			}
+
+		// 		}, function(err){
+		// 			console.log(err);
+		// 		})
+		// }
 
 	}
 })();
