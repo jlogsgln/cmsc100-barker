@@ -1,0 +1,104 @@
+body{
+	background-color: #f5f8fa;
+}
+nav{
+	height: 45px;
+	box-shadow: 0px -2px 14px #888888;
+
+}
+
+.nav-wrapper{
+	width: 92%;
+	margin: auto;
+}
+
+.tabs .tab{
+	height: 45px;
+	line-height: 45px;
+	text-transform: none;
+}
+
+.tabs .tab a, .tabs .tab a.active{
+	font-size: 13px;
+	color: #66757f;
+}
+.tabs .tab a:hover{
+	color: #3C3C3C;
+}
+.tabs .indicator{
+	height: 3px;
+	background-color: #66757f;
+}
+.tabs{
+	background-color: transparent;
+	width: auto;
+	height: 45px;
+}
+
+
+nav i.material-icons{
+	height: 45px;
+	line-height: 45px;
+	color: #039be5;
+}
+
+
+#right-nav{
+	height: 45px;
+	line-height: 45px;
+	text-transform: none;
+}
+
+#compose-nav{
+	background-color: #039be5;
+	height: 33px;
+	padding: 0px 20px;
+	font-size: 15px;
+	border-radius: 6px;
+	text-transform: capitalize;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+	margin: 0px;
+}
+
+#search-nav-container{
+	margin-right: 10px;
+}
+
+#icon-nav{
+	padding: 5px 10px 5px 0px;
+	height: 45px;
+}
+
+#icon-nav img{
+	border-radius: 5px;
+	height: 35px;
+	border: 1px solid #e1e8ed;
+}
+#search-nav{
+	background-color: white;
+	border: 1px solid #e1e8ed;
+	color: black;
+	border-radius: 15px;
+	padding: 0px 16px;
+	font-size: 13px;
+	height: 32px;
+	width: 188px;
+	margin: 0px;
+}
+
+#search-nav-container input:focus{
+	border-bottom: none !important;
+		box-shadow: none !important
+}
+
+
+
+.container{
+	width: 92%;
+    margin: auto;
+    max-width: none;
+}
+
+.row .col{
+	padding-right: 0px;
+}

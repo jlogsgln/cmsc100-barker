@@ -1,0 +1,62 @@
+<div id="homepage" ng-controller="TwitterCtrl">
+<div class="container">
+  <div class="row">
+    <div class="col s12 m5 right">
+      <div class="card black-text">
+        <div class="card-content">
+        <form>
+          <div class="input-field col s12" ng-init="sign_in()">
+            <input placeholder="Phone, email or username" id="name" type="text" class="active validate" required ng-model="log_username">
+          </div>
+          <div class="input-field col s12">
+            <input id="password" type="password" placeholder="Password" class="validate" required ng-model="log_password">  
+          </div>
+          <div class = "row">
+            <div class="col s12">
+                <button class="btn waves-effect waves blue darken-1 right" ng-click="sign_in_clicked()">Sign-in</button>
+                
+            </div>
+         
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- second card -->
+        <div class="row">
+         <div class="col s12 m5 right" ng-init="create_account()">
+            <div class="card black-text" id="sign-up">
+              
+               <div class="card-content ">
+                <div class="card-title">
+                 Welcome to Twitter. New to twitter? Sign-up
+               </div>
+                <form>
+                <div class="input-field col s12">
+                  <input placeholder="Fullname" id="name" type="text" class="active validate" required ng-model="fullname">
+               </div>
+                <div class="input-field col s12">
+                  <input id="email" placeholder="Email" class="validate" required ng-model="email">  
+               </div>
+               <div class="input-field col s12">
+                  <input id="username" type="text" placeholder="Username" class="validate" required ng-model="username">  
+               </div>
+               <div class="input-field col s12">
+                  <input id="password" type="password" placeholder="Password" class="validate" required ng-model="password">  
+               </div>
+               <div class = "row">
+               <div class="col s12">
+                    <button class="btn waves-effect waves right yellow darken-3 black-text" ng-click="clicked()">Sign-up for Twitter</button>
+               </div>
+             
+           </div>
+            </form>
+            </div>
+            </div>
+         </div>
+      </div>
+
+<div class="hiddendiv common"></div><div class="drag-target" data-sidenav="nav-mobile" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+</div>
+</div>

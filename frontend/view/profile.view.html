@@ -1,0 +1,362 @@
+<main  ng-controller="TwitterCtrl"  ng-init="get_logged()">
+<nav class="white darken-1">
+	<div class="nav-wrapper" >
+		
+		<ul class="tabs left hide-on-med-and-down "">
+			<li class="tab col s3 "><a ng-click="link_home()">Home</a></li>
+			<li class="tab col s3"><a ng-click="link_home()">Notifications</a></li>
+			<li class="tab col s3"><a ng-click="link_home()" class="active">Message</a></li>
+		</ul>
+		<a href="#" class="brand-logo center"><i class="material-icons"><i class="material-icons">record_voice_over</i></i></a>
+		<ul class="right hide-on-med-and-down "  id="right-nav">
+			<li class="col s5" id="search-nav-container">
+				<input placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required>
+			</li>
+			<li class="col s1" id="icon-nav" ng-init="sign_out()">
+				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
+				<ul id='nav-dropdown' class='dropdown-content z-depth-0' >
+					<li><a href="#!">View Profile</a></li>
+					<li class="divider"></li>
+					<li><a ng-click="sign_out_clicked()">Logout</a></li>
+				</ul>
+			</li>
+			<li class="col s3">
+				<button class="btn waves-effect waves-blue" id="compose-nav" href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Tweet" data-target="modal3">Bark</button>
+			</li>
+		</ul>
+	</div>
+</nav>
+<main>
+<div id="header">
+</div>
+<div id="profile-ctrl">
+	<div class="container">
+		<div class="row">
+			<div class="col s3" >
+				<!-- <div id="header-twitcon">
+					<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
+					
+				</div> -->
+				
+			</div>
+			<div class="col s4" id="profile-header-stats">
+				<ul class="tabs">
+					<li class="tab col l3"  ng-init="get_tweetcount()">
+						<a href="#test1">
+							<div class="profile-stats">
+								<span>Barks</span>
+								<span class="stat-bold">{{tweetcount.tweetcount}}</span>
+							</div>
+							
+						</a>
+					</li>
+					<li class="tab col l4" ng-init="get_followingcount()">
+						<a href="#test1">
+							<div class="profile-stats">
+								<span>Following</span>
+								<span class="stat-bold">{{followingcount.followingcount}}</span>
+							</div>
+							
+						</a>
+					</li>
+					<li class="tab col l4"  ng-init="get_followerscount()">
+						<a href="#test1">
+							<div class="profile-stats">
+								<span>Followers</span>
+								<span class="stat-bold">{{followerscount.followerscount}}</span>
+							</div>
+							
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col s5" id="profile-follow">
+				<button class="btn waves-effect waves-follow z-depth-0" id="follow-btn">Follow</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container" id="profile-contents">
+	<div class="row" ng-model="logged_account">
+		<div class="col s3">
+			<div id="header-twitcon">
+				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
+			</div>
+			<div id="user-bio" ng-model="logged_account">
+				<a href="#/profile"><h5>{{logged_account.fullname}}</h5></a>
+				<a href="#/profile"><span>{{logged_account.username}}</span></a>
+			</div>
+		</div>
+		<div class="col s6">
+			<div class="card z-depth-0" id="twitter-timeline-container" ng-init="get_tweets()">
+				<div class="card z-depth-0 col s12 tweet" ng-repeat="tweet in tweets" >
+					<div class="col s1 tweeted-by-twitcon">
+						<div class="user-twitcon">
+							<img src="assets/images/user.jpg" alt="">
+						</div>
+					</div>
+					<div class="col s11 tweet-content">
+							<div class="col s8 tweeted-by">
+								<a href="#/profile"><h6>{{tweet.user_full_name}}</h6></a>
+								<a href="#/profile"><span>{{tweet.user_handle}}</span></a>
+							</div>
+							<div class="col s4 tweet-timestamp">
+								<span class="right">{{tweet.tweet_time | date:'medium'}} </span>
+							</div>
+							<div class="col s12 tweet-msg">
+								<p>{{tweet.tweet}}</p>
+							</div>
+							<div class="col s12 tweet-controls">
+								<div class="col s2 tweet-ctrl-more">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Reply Tweet" data-target="modal2" ng-click="reply_tweet(tweet)">
+										<i class="material-icons">reply</i>
+									</a>
+								</div>
+								<div class="col s2 tweet-ctrl-retweet">
+									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Retweet">
+										<i class="material-icons">repeat</i>
+										<span>{{tweet.tweet_retweets}}</span>
+									</a>
+								</div>
+								<div class="col s2 tweet-ctrl-fave">
+									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Like">
+										<i class="material-icons" ng-click="like_tweet(tweet)">favorite</i>
+										<span>{{tweet.tweet_likes}}</span>
+									</a>
+								</div>
+								<div class="col s2 tweet-ctrl-more">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Edit Tweet" data-target="modal1" ng-click="edit_tweet(tweet)">
+										<i class="material-icons">edit</i>
+									</a>
+								</div>								
+								<div class="col s2 tweet-ctrl-more" ng-click="delete_tweet(tweet)">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Delete Tweet" onclick="Materialize.toast('Tweet deleted!', 4000)">
+										<i class="material-icons">delete</i>
+									</a>
+									<!-- <ul id='more-dropdown' class='dropdown-content z-depth-0' >
+										<li><a href="#!">Delete Tweet</a></li>
+										<li class="divider"></li>
+										<li><a href="#!" onclick="Materialize.toast('Tweet deleted!', 4000)">Delete Tweet</a></li>
+									</ul> -->
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<!-- Modal Structure -->
+		<div id="modal1" class="modal">
+		<div class="modal-content">
+		   <div class="col s11" id="tweetbox">
+				<textarea placeholder="What's your edit?" type="text" class="right active validate materialize-textarea" required ng-model="edittweet" id='textarea1'></textarea>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div id="tweetbox-ctrls" class="right">
+				<span id="count1">140</span>
+				<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
+				<button class="btn waves-effect waves-teal z-depth-0" id="post1" onclick="javascript:eraseText1(); Materialize.toast('Tweet edited!', 4000);" disabled ng-click="edit_tweet_clicked(edittweet)">Tweet</button>
+			</div>
+		</div>
+		</div>
+
+		<div id="modal2" class="modal" >
+		<div class="modal-content">
+		   <div class="col s11" id="tweetbox">
+				<textarea placeholder="What's your reply?" type="text" class="right active validate materialize-textarea" required ng-model="replytweet" id='textarea2'></textarea>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div id="tweetbox-ctrls" class="right">
+				<span id="count2">140</span>
+				<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
+				<button class="btn waves-effect waves-blue z-depth-0" id="post2" onclick="javascript:eraseText2(); Materialize.toast('Tweet sent!', 4000);" disabled ng-click="reply_tweet_clicked(replytweet)">Tweet</button>
+			</div>
+		</div>
+		</div>
+
+		<div id="modal3" class="modal" >
+		<div class="modal-content">
+		   <div class="col s11" id="tweetbox">
+				<textarea placeholder="What's happening?" type="text" class="right active validate materialize-textarea" required id='textarea3' ng-init="post_tweet2()" ng-model="tweet2"></textarea>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div id="tweetbox-ctrls" class="right">
+				<span id="count3">140</span>
+				<!-- <button class="btn waves-effect waves-teal z-depth-0" id="tweetbox-post" ng-click="post_tweet_clicked()" onclick="Materialize.toast('Tweet sent!', 4000)"">Tweet</button> -->
+				<button class="btn waves-effect waves-blue z-depth-0" id="post3" onclick="javascript:eraseText3(); Materialize.toast('Tweet sent!', 4000);" disabled ng-click="post_tweet2_clicked()">Tweet</button>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+</main>
+<script type="text/javascript" src="assets/js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="assets/js/materialize.min.js"></script>
+<script type="text/javascript">
+		function eraseText() {
+		    document.getElementById('#tweetbox-textarea').value = "";
+		}
+
+		function eraseText1() {
+		    document.getElementById("#textarea1").value = "";
+		}
+
+		function eraseText2() {
+		    document.getElementById("#textarea2").value = "";
+		}
+
+		function eraseText3() {
+		    document.getElementById("#textarea3").value = "";
+		}
+
+	$(document).ready(function() {
+		
+
+	    var limit = 140;
+
+	    var $counter = $('#char-count').text(limit);
+	    var $input = $('#tweetbox-textarea').keyup(function() {
+
+	        var left = limit - $(this).val().length;
+	        $counter.toggleClass("overlimit", left < 0).text(left);
+	    });
+
+  		var $counter1 = $('#count1').text(limit);
+	    var $input1 = $('#textarea1').keyup(function() {
+
+	        var left = limit - $(this).val().length;
+	        $counter1.toggleClass("overlimit", left < 0).text(left);
+	    });
+
+	    var $counter2 = $('#count2').text(limit);
+	    var $input2 = $('#textarea2').keyup(function() {
+			
+			var left = limit - $(this).val().length;
+	        $counter2.toggleClass("overlimit", left < 0).text(left);
+	    });
+
+	    var $counter3 = $('#count3').text(limit);
+	    var $input3 = $('#textarea3').keyup(function() {
+			
+			var left = limit - $(this).val().length;
+	        $counter3.toggleClass("overlimit", left < 0).text(left);
+	    });
+
+
+
+
+		$('#tweetbox-textarea').keyup(function() {
+		    var thetext = $(this).val();
+
+		    if (thetext.length > 140) {
+		        $('#tweetbox-post').attr('disabled', 'disabled');
+		        $('#char-count').css( "color", "#e81c4f" );
+
+		    }else if(thetext.length == 0){
+		        $('#tweetbox-post').attr('disabled', 'disabled');
+		    }
+
+
+		    else {
+		        $('#tweetbox-post').removeAttr('disabled');
+		        $('#char-count').css( "color", "#66757f" );
+		        
+		        
+		    }
+		});
+
+		$('#textarea1').keyup(function() {
+		    var thetext = $(this).val();
+
+		    if (thetext.length > 140) {
+		        $('#post1').attr('disabled', 'disabled');
+		        $('#count1').css( "color", "#e81c4f" );
+
+		    }else if(thetext.length == 0){
+		        $('#post1').attr('disabled', 'disabled');
+		    }
+
+
+		    else {
+		        $('#post1').removeAttr('disabled');
+		        $('#count1').css( "color", "#66757f" );
+		        
+		        
+		    }
+		});
+
+		$('#textarea2').keyup(function() {
+		    var thetext = $(this).val();
+
+		    if (thetext.length > 140) {
+		        $('#post2').attr('disabled', 'disabled');
+		        $('#count2').css( "color", "#e81c4f" );
+
+		    }else if(thetext.length == 0){
+		        $('#post2').attr('disabled', 'disabled');
+		    }
+
+
+		    else {
+		        $('#post2').removeAttr('disabled');
+		        $('#count2').css( "color", "#66757f" );
+		        
+		        
+		    }
+		});
+
+		$('#textarea3').keyup(function() {
+		    var thetext = $(this).val();
+
+		    if (thetext.length > 140) {
+		        $('#post3').attr('disabled', 'disabled');
+		        $('#count3').css( "color", "#e81c4f" );
+
+		    }else if(thetext.length == 0){
+		        $('#post3').attr('disabled', 'disabled');
+		    }
+
+
+		    else {
+		        $('#post3').removeAttr('disabled');
+		        $('#count3').css( "color", "#66757f" );
+		        
+		        
+		    }
+		});
+
+
+	    $('#tweetbox-post').click(function() {
+	        var val = $input.val();
+	        $('#tweetbox-post').attr('disabled', 'disabled');
+	        $input.val('');
+	        $counter.text(limit).removeClass('overlimit');
+	    })
+
+	    $('#post1').click(function() {
+	        var val = $input.val();
+	        $('#post1').attr('disabled', 'disabled');
+	        $input1.val('');
+	        $counter1.text(limit).removeClass('overlimit');
+	    })
+
+	    $('#post2').click(function() {
+	        var val = $input.val();
+	        $('#post2').attr('disabled', 'disabled');
+	        $input2.val('');
+	        $counter2.text(limit).removeClass('overlimit');
+	    })
+
+	    $('#post3').click(function() {
+	        var val = $input.val();
+	        $('#post3').attr('disabled', 'disabled');
+	        $input3.val('');
+	        $counter3.text(limit).removeClass('overlimit');
+	    })
+
+	     $('.modal').modal();
+	});
+</script>

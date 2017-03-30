@@ -1,0 +1,152 @@
+<main  ng-controller="TwitterCtrl"  ng-init="get_logged()">
+<nav class="white darken-1">
+	<div class="nav-wrapper" >
+		
+		<ul class="tabs left hide-on-med-and-down "">
+			<li class="tab col s3 "><a href="/#/home">Home</a></li>
+			<li class="tab col s3"><a href="/#/home">Notifications</a></li>
+			<li class="tab col s3"><a href="/#/home" class="active">Message</a></li>
+		</ul>
+		<a href="#" class="brand-logo center"><i class="material-icons"><i class="material-icons">record_voice_over</i></i></a>
+		<ul class="right hide-on-med-and-down "  id="right-nav">
+			<li class="col s5" id="search-nav-container">
+				<input placeholder="Search Twitter" id="search-nav" type="text" class="active validate" required>
+			</li>
+			<li class="col s1" id="icon-nav">
+				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
+				<ul id='nav-dropdown' class='dropdown-content z-depth-0' >
+					<li><a href="#!">View Profile</a></li>
+					<li class="divider"></li>
+					<li><a ng-click="sign_out_clicked()">Logout</a></li>
+				</ul>
+			</li>
+			<li class="col s3" ng-init="sign_out()">
+				<button class="btn waves-effect waves-teal" id="compose-nav">Baaark</button>
+			</li>
+		</ul>
+	</div>
+</nav>
+<main>
+<div id="header">
+</div>
+<div id="profile-ctrl">
+	<div class="container">
+		<div class="row">
+			<div class="col s3" >
+				<!-- <div id="header-twitcon">
+					<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
+					
+				</div> -->
+				
+			</div>
+			<div class="col s4" id="profile-header-stats">
+				<ul class="tabs">
+					<li class="tab col l3"  ng-init="get_tweetcount()">
+						<a href="#test1">
+							<div class="profile-stats">
+								<span>Barks</span>
+								<span class="stat-bold">{{tweetcount.tweetcount}}</span>
+							</div>
+							
+						</a>
+					</li>
+					<li class="tab col l4" >
+						<a href="#test1">
+							<div class="profile-stats">
+								<span>Following</span>
+								<span class="stat-bold">240</span>
+							</div>
+							
+						</a>
+					</li>
+					<li class="tab col l4"  ng-init="get_followerscount()">
+						<a href="#test1">
+							<div class="profile-stats">
+								<span>Followers</span>
+								<span class="stat-bold">{{followerscount.followerscount}}</span>
+							</div>
+							
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col s5" id="profile-follow">
+				<button class="btn waves-effect waves-follow z-depth-0" id="follow-btn">Follow</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container" id="profile-contents">
+	<div class="row" ng-model="logged_account">
+		<div class="col s3">
+			<div id="header-twitcon">
+				<img src="assets/images/user.jpg" alt="" class='dropdown-button' href='#' data-activates='nav-dropdown'>
+			</div>
+			<div id="user-bio" ng-model="logged_account">
+				<a href="#/profile"><h5>{{logged_account.fullname}}</h5></a>
+				<a href="#/profile"><span>{{logged_account.username}}</span></a>
+			</div>
+		</div>
+		<div class="col s6">
+			<div class="card z-depth-0" id="twitter-timeline-container" ng-init="get_tweets()">
+				<div class="card z-depth-0 col s12 tweet" ng-repeat="tweet in tweets" >
+					<div class="col s1 tweeted-by-twitcon">
+						<div class="user-twitcon">
+							<img src="assets/images/user.jpg" alt="">
+						</div>
+					</div>
+					<div class="col s11 tweet-content">
+							<div class="col s8 tweeted-by">
+								<a href="#/profile"><h6>{{tweet.user_full_name}}</h6></a>
+								<a href="#/profile"><span>{{tweet.user_handle}}</span></a>
+							</div>
+							<div class="col s4 tweet-timestamp">
+								<span class="right">{{tweet.tweet_time | date:'medium'}} </span>
+							</div>
+							<div class="col s12 tweet-msg">
+								<p>{{tweet.tweet}}</p>
+							</div>
+							<div class="col s12 tweet-controls">
+								<div class="col s2 tweet-ctrl-reply">
+									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Reply">
+										<i class="material-icons">reply</i>
+										<span></span>
+									</a>
+								</div>
+								<div class="col s2 tweet-ctrl-retweet">
+									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Retweet">
+										<i class="material-icons">repeat</i>
+										<span>{{tweet.tweet_retweets}}</span>
+									</a>
+								</div>
+								<div class="col s2 tweet-ctrl-fave">
+									<a href="" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Like">
+										<i class="material-icons">favorite</i>
+										<span>{{tweet.tweet_likes}}</span>
+									</a>
+								</div>
+								<div class="col s2 tweet-ctrl-more" ng-click="">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Edit Tweet">
+										<i class="material-icons">edit</i>
+									</a>
+								</div>
+								<div class="col s2 tweet-ctrl-more" ng-click="delete_tweet(tweet)">
+									<a href="" class="tooltipped dropdown-button" data-position="top" data-delay="50" data-tooltip="Delete Tweet" onclick="Materialize.toast('Tweet deleted!', 4000)">
+										<i class="material-icons">delete</i>
+									</a>
+									<!-- <ul id='more-dropdown' class='dropdown-content z-depth-0' >
+										<li><a href="#!">Delete Tweet</a></li>
+										<li class="divider"></li>
+										<li><a href="#!" onclick="Materialize.toast('Tweet deleted!', 4000)">Delete Tweet</a></li>
+									</ul> -->
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</main>
+<script type="text/javascript" src="assets/js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="assets/js/materialize.min.js"></script>
